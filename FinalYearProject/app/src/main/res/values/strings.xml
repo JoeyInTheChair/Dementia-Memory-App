@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FinalYearProject</string>
+    <string name="id_name">Patient\'s Name</string>
+    <string name="welcome">Welcome</string>
+    <string name="click_here_to_continue">Click here to continue</string>
+    <string name="description">Description</string>
+    <string name="check_graph">Check Graph</string>
+    <string name="reminders">Reminders</string>
+    <string name="quiz">Quiz</string>
+    <string name="patient_first_name">Patient First Name</string>
+    <string name="patient_last_name">Patient Last Name</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="enter_description_if_necessary">Enter Description (If necessary)</string>
+    <string name="plus">+</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="click_here">Click Here</string>
+    <string name="add_new_patient">Add New Patient</string>
+</resources>
