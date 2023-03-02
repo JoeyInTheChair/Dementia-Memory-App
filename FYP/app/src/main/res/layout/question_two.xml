@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="338dp"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="145dp"
         android:layout_marginEnd="338dp"
         android:text="TextView"
         android:textColor="#000000"
@@ -94,24 +94,24 @@
         android:layout_width="256dp"
         android:layout_height="80dp"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="900dp"
         android:layout_marginBottom="132dp"
         android:text="GO"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guessWordFive" />
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <Button
         android:id="@+id/continueToQThree"
         android:layout_width="256dp"
         android:layout_height="80dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="125dp"
+        android:layout_marginTop="900dp"
+        android:layout_marginEnd="120dp"
         android:layout_marginBottom="132dp"
         android:text="Continue"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guessWordFive" />
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
