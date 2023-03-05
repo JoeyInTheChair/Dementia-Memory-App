@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FYP</string>
     <string name="name_these_images">Name These Images</string>
+    <string name="tap_one_circle_to_another_starting_at_1_and_alternating_numbers_amp_letters_in_order_ending_at_f"><![CDATA[Tap one circle to another, starting at 1 and alternating numbers & letters in order, ending at F]]></string>
 </resources>

@@ -2,25 +2,24 @@ package com.example.fyp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class questionTwo extends AppCompatActivity {
 
     TextView [] listOfWords = new TextView[5];
     private List<String> list = new ArrayList<>();
-    private List<String> randomList = new ArrayList<>();
+    private final List<String> randomList = new ArrayList<>();
+
+    Button goButton, continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,22 @@ public class questionTwo extends AppCompatActivity {
         setContentView(R.layout.question_two);
         getListOfWords();
         setRandomWordsOnScreen();
+
+        goButton = (Button) findViewById(R.id.goButton);
+        continueButton = (Button) findViewById(R.id.continueToQThree);
+        continueButton.setVisibility(View.INVISIBLE);
+
+        goButton.setOnClickListener(view -> {
+            for (TextView listOfWord : listOfWords) listOfWord.setVisibility(View.INVISIBLE);
+            goButton.setVisibility(View.INVISIBLE);
+            continueButton.setVisibility(View.VISIBLE);
+        });
+        continueButton.setOnClickListener(v -> continueToQuestionThree());
+    }
+
+    public void continueToQuestionThree() {
+        Intent intent = new Intent(this, questionThree.class);
+        startActivity(intent);
     }
 
     private void setRandomWordsOnScreen() {
@@ -59,8 +74,8 @@ public class questionTwo extends AppCompatActivity {
     private void createWordsList() {
         int[] randomNumbers = new int[5];
         shuffleList(this.list);
-        int listSize = this.list.size();
-        for (int i = 1; i <= listSize; i++) {
+        int listSize = this.list.size()-1;
+        for (int i = 0; i <= listSize; i++) {
             randomNumbers[0] = (int) (Math.random() * listSize) + 1;
 
             while (randomNumbers[1] == randomNumbers[0]) {
