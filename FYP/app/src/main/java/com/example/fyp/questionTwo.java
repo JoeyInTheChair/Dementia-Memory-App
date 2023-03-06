@@ -28,8 +28,8 @@ public class questionTwo extends AppCompatActivity {
         getListOfWords();
         setRandomWordsOnScreen();
 
-        goButton = (Button) findViewById(R.id.goButton);
-        continueButton = (Button) findViewById(R.id.continueToQThree);
+        goButton = findViewById(R.id.goButton);
+        continueButton = findViewById(R.id.continueToQThree);
         continueButton.setVisibility(View.INVISIBLE);
 
         goButton.setOnClickListener(view -> {
@@ -46,11 +46,11 @@ public class questionTwo extends AppCompatActivity {
     }
 
     private void setRandomWordsOnScreen() {
-        listOfWords[0] = (TextView) findViewById(R.id.guessWordOne);
-        listOfWords[1] = (TextView) findViewById(R.id.guessWordTwo);
-        listOfWords[2] = (TextView) findViewById(R.id.guessWordThree);
-        listOfWords[3] = (TextView) findViewById(R.id.guessWordFour);
-        listOfWords[4] = (TextView) findViewById(R.id.guessWordFive);
+        listOfWords[0] = findViewById(R.id.guessWordOne);
+        listOfWords[1] = findViewById(R.id.guessWordTwo);
+        listOfWords[2] = findViewById(R.id.guessWordThree);
+        listOfWords[3] = findViewById(R.id.guessWordFour);
+        listOfWords[4] = findViewById(R.id.guessWordFive);
 
         listOfWords[0].setText(randomList.get(0));
         listOfWords[1].setText(randomList.get(1));

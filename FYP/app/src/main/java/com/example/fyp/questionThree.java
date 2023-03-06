@@ -39,14 +39,13 @@ public class questionThree extends AppCompatActivity {
         circButtons[10].setOnClickListener((view -> inputAnswer(circButtons[10])));
         circButtons[11].setOnClickListener((view -> inputAnswer(circButtons[11])));
 
-        Button reset = (Button) findViewById(R.id.resetButton);
-        continueButton = (Button) findViewById(R.id.continueToQFour);
+        Button reset = findViewById(R.id.resetButton);
+        continueButton = findViewById(R.id.continueToQFour);
 
         continueButton.setVisibility(View.INVISIBLE);
 
         reset.setOnClickListener((view -> {
             answer.removeAll(answer);
-            System.out.println("[UPDATE]: " + answer);
             for (Button circButton : circButtons) circButton.setVisibility(View.VISIBLE);
             continueButton.setVisibility(View.INVISIBLE);
         }));
@@ -63,23 +62,24 @@ public class questionThree extends AppCompatActivity {
         ans = button.getText().toString();
         answer.add(ans);
         button.setVisibility(View.INVISIBLE);
-        System.out.println("[INFO]: " + answer);
-        if(answer.size() == 12)
+        if(answer.size() == 12) {
             continueButton.setVisibility(View.VISIBLE);
+            System.out.println("[FINAL ANSWER]: " + answer);
+        }
     }
     public void setCircleButtons() {
-        circButtons[0] = (Button) findViewById(R.id.circ1);
-        circButtons[1] = (Button) findViewById(R.id.circ2);
-        circButtons[2] = (Button) findViewById(R.id.circ3);
-        circButtons[3] = (Button) findViewById(R.id.circ4);
-        circButtons[4] = (Button) findViewById(R.id.circ5);
-        circButtons[5] = (Button) findViewById(R.id.circ6);
-        circButtons[6] = (Button) findViewById(R.id.circ7);
-        circButtons[7] = (Button) findViewById(R.id.circ8);
-        circButtons[8] = (Button) findViewById(R.id.circ9);
-        circButtons[9] = (Button) findViewById(R.id.circ10);
-        circButtons[10] = (Button) findViewById(R.id.circ11);
-        circButtons[11] = (Button) findViewById(R.id.circ12);
+        circButtons[0] = findViewById(R.id.circ1);
+        circButtons[1] = findViewById(R.id.circ2);
+        circButtons[2] = findViewById(R.id.circ3);
+        circButtons[3] = findViewById(R.id.circ4);
+        circButtons[4] = findViewById(R.id.circ5);
+        circButtons[5] = findViewById(R.id.circ6);
+        circButtons[6] = findViewById(R.id.circ7);
+        circButtons[7] = findViewById(R.id.circ8);
+        circButtons[8] = findViewById(R.id.circ9);
+        circButtons[9] = findViewById(R.id.circ10);
+        circButtons[10] = findViewById(R.id.circ11);
+        circButtons[11] = findViewById(R.id.circ12);
     }
 
     public void sortCircleButtons() {

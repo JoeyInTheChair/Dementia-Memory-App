@@ -1,6 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/clock"
+        android:layout_width="1000dp"
+        android:layout_height="1000dp"
+        android:layout_marginTop="-70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:srcCompat="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="298dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="298dp"
+        android:text="Clock Test"
+        android:textColor="#000000"
+        android:textSize="65sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/twelveOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginEnd="400dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <EditText
+        android:id="@+id/threeOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginEnd="96dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461" />
+
+    <EditText
+        android:id="@+id/nineOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="96dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461" />
+
+    <EditText
+        android:id="@+id/sixOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="520dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toStartOf="@+id/threeOclock"
+        app:layout_constraintStart_toEndOf="@+id/nineOclock"
+        app:layout_constraintTop_toBottomOf="@+id/twelveOclock" />
+
+    <EditText
+        android:id="@+id/oneOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toStartOf="@+id/threeOclock"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/nineOclock"
+        app:layout_constraintTop_toTopOf="@+id/twelveOclock" />
+
+    <EditText
+        android:id="@+id/twoOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="316dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/threeOclock"
+        app:layout_constraintStart_toEndOf="@+id/elevenOclock"
+        app:layout_constraintTop_toBottomOf="@+id/twelveOclock"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <EditText
+        android:id="@+id/fourOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="464dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/sixOclock"
+        app:layout_constraintStart_toEndOf="@+id/nineOclock"
+        app:layout_constraintTop_toBottomOf="@+id/threeOclock"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/fiveOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="454dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toStartOf="@+id/threeOclock"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/sixOclock"
+        app:layout_constraintTop_toBottomOf="@+id/twelveOclock" />
+
+    <EditText
+        android:id="@+id/sevenOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="454dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toStartOf="@+id/sixOclock"
+        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintStart_toEndOf="@+id/nineOclock"
+        app:layout_constraintTop_toBottomOf="@+id/twelveOclock" />
+
+    <EditText
+        android:id="@+id/eightOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="464dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/sixOclock"
+        app:layout_constraintEnd_toStartOf="@+id/threeOclock"
+        app:layout_constraintTop_toBottomOf="@+id/nineOclock"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/tenOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginEnd="316dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/nineOclock"
+        app:layout_constraintEnd_toStartOf="@+id/oneOclock"
+        app:layout_constraintTop_toBottomOf="@+id/twelveOclock"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <EditText
+        android:id="@+id/elevenOclock"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="360dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toStartOf="@+id/threeOclock"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="@+id/tenOclock"
+        app:layout_constraintTop_toTopOf="@+id/twelveOclock" />
+
+    <Button
+        android:id="@+id/continueToQFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:text="Continue"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
