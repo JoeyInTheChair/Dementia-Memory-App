@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/correctGuesses"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="#673AB7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="@+id/guessWordFour"
+        app:layout_constraintEnd_toEndOf="@+id/guessWordThree"
+        app:layout_constraintStart_toStartOf="@+id/guessWordThree"
+        app:layout_constraintTop_toBottomOf="@+id/guessWordTwo" />
+
     <TextView
         android:id="@+id/guessWordThree"
         android:layout_width="wrap_content"

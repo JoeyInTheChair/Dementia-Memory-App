@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class questionTwo extends AppCompatActivity {
     private final List<String> randomList = new ArrayList<>();
 
     Button goButton, continueButton;
+    EditText answer;
+    private int input = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +34,40 @@ public class questionTwo extends AppCompatActivity {
 
         goButton = findViewById(R.id.goButton);
         continueButton = findViewById(R.id.continueToQThree);
+        answer = findViewById(R.id.correctGuesses);
+
         continueButton.setVisibility(View.INVISIBLE);
+        answer.setVisibility(View.INVISIBLE);
 
         goButton.setOnClickListener(view -> {
             for (TextView listOfWord : listOfWords) listOfWord.setVisibility(View.INVISIBLE);
             goButton.setVisibility(View.INVISIBLE);
+            answer.setVisibility(View.VISIBLE);
             continueButton.setVisibility(View.VISIBLE);
         });
-        continueButton.setOnClickListener(v -> continueToQuestionThree());
+        continueButton.setOnClickListener(view -> {
+            if(checkValidation()) {
+                input = Integer.parseInt(answer.getText().toString());
+                System.out.println("[FINAL ANSWER]: " + input);
+                continueToQuestionThree();
+            }
+            else {
+                alert();
+            }
+        });
     }
 
     public void continueToQuestionThree() {
         Intent intent = new Intent(this, questionThree.class);
         startActivity(intent);
+    }
+
+    public void alert() {
+        if (TextUtils.isEmpty(answer.getText().toString())) answer.setError("Input Needed");
+    }
+
+    public boolean checkValidation() {
+        return !TextUtils.isEmpty(answer.getText().toString());
     }
 
     private void setRandomWordsOnScreen() {

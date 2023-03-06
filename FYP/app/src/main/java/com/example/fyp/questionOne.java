@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class questionOne extends AppCompatActivity {
 
     ImageView imageView;
     Button nextButton, continueButton;
+    EditText answer;
 
     Random r;
     private final Integer[] viewImage = {
@@ -45,6 +48,7 @@ public class questionOne extends AppCompatActivity {
 
     private final List<Integer> imageList = Arrays.asList(viewImage);
     private final List<Integer> randomList = new ArrayList<>();
+    private int input = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,9 @@ public class questionOne extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         nextButton = findViewById(R.id.next);
         continueButton = findViewById(R.id.continueToQTwo);
+        answer = findViewById(R.id.correctAnswer);
+
+        answer.setVisibility(View.INVISIBLE);
         continueButton.setVisibility(View.INVISIBLE);
         r = new Random();
 
@@ -66,16 +73,35 @@ public class questionOne extends AppCompatActivity {
                 randomList.remove(0);
             }
             else {
+                imageView.setVisibility(View.INVISIBLE);
+                answer.setVisibility(View.VISIBLE);
                 nextButton.setVisibility(View.INVISIBLE);
                 continueButton.setVisibility(View.VISIBLE);
             }
         });
-        continueButton.setOnClickListener(v -> continueToQuestionTwo());
+        continueButton.setOnClickListener(view -> {
+            if(checkValidation()) {
+                input = Integer.parseInt(answer.getText().toString());
+                System.out.println("[FINAL ANSWER]: " + input);
+                continueToQuestionTwo();
+            }
+            else {
+                alert();
+            }
+        });
     }
 
     public void continueToQuestionTwo() {
         Intent intent = new Intent(this, questionTwo.class);
         startActivity(intent);
+    }
+
+    public void alert() {
+        if (TextUtils.isEmpty(answer.getText().toString())) answer.setError("Input Needed");
+    }
+
+    public boolean checkValidation() {
+        return !TextUtils.isEmpty(answer.getText().toString());
     }
 
     private void shuffleList(List<Integer> imageList) {
