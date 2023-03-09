@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1096010048137",
+    "firebase_url": "https://finalyearproject2023-53e37-default-rtdb.firebaseio.com",
+    "project_id": "finalyearproject2023-53e37",
+    "storage_bucket": "finalyearproject2023-53e37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096010048137:android:6145a7742e722908385c58",
+        "android_client_info": {
+          "package_name": "com.example.finalyearproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096010048137-oev6c57hqpihh1jfupiq04pi0o58m7ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqo4qyBWElgc4qt4P3zTtQl6KUn4BVdWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096010048137-oev6c57hqpihh1jfupiq04pi0o58m7ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096010048137:android:52c0447c837a5812385c58",
+        "android_client_info": {
+          "package_name": "com.mu.fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096010048137-oev6c57hqpihh1jfupiq04pi0o58m7ma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqo4qyBWElgc4qt4P3zTtQl6KUn4BVdWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096010048137-oev6c57hqpihh1jfupiq04pi0o58m7ma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
