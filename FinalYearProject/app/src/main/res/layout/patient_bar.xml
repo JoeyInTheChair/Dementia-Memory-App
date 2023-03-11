@@ -43,6 +43,18 @@
             android:layout_toRightOf="@+id/profilePic"
             android:layout_marginLeft="15dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gender"
+            android:text="Gender"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/dateOfBirth"
+            android:layout_toRightOf="@+id/profilePic"
+            android:layout_marginLeft="15dp"/>
+
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 

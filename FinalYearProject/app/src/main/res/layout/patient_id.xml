@@ -16,18 +16,18 @@
         android:layout_marginRight="92dp"
         android:text="@string/id_name"
         android:textColor="#0097A7"
-        android:textSize="34sp"
+        android:textSize="55sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="359dp"
-        android:layout_height="371dp"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:orientation="horizontal"
@@ -38,61 +38,66 @@
         <TextView
             android:id="@+id/patient_desc"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/description"
-            android:textColor="#0097A7"
-            android:textSize="24sp" />
+            android:textColor="#000000"
+            android:textSize="35sp" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/go_quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginLeft="162dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginRight="162dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="50dp"
         android:text="@string/quiz"
         android:textColor="#212121"
+        android:textSize="35sp"
         app:backgroundTint="#0097A7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reminders" />
+        app:layout_constraintEnd_toStartOf="@+id/check_graph"
+        app:layout_constraintStart_toEndOf="@+id/reminders"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/reminders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginBottom="103dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
         android:text="@string/reminders"
         android:textColor="#212121"
+        android:textSize="35sp"
         app:backgroundTint="#0097A7"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/check_graph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="103dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/check_graph"
         android:textColor="#212121"
+        android:textSize="35sp"
         app:backgroundTint="#0097A7"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description"
+        android:textColor="#0097A7"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/patient_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

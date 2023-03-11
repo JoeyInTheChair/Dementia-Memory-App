@@ -18,7 +18,6 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
-     * @param options
      */
     public PatientListAdapter(@NonNull FirebaseRecyclerOptions<patientModel> options) {
         super(options);
@@ -26,9 +25,10 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull patientModel model) {
-        holder.name.setText(model.getFirstName() + " " + model.getLastName());
+        String fullName = model.getFirstName() + " " + model.getLastName();
+        holder.name.setText(fullName);
         holder.dateOfBirth.setText(model.getDateOfBirth());
-
+        holder.gender.setText(model.getGender());
     }
 
     @NonNull
@@ -38,15 +38,16 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
         return new myViewHolder(view);
     }
 
-    class myViewHolder extends RecyclerView.ViewHolder {
+    public static class myViewHolder extends RecyclerView.ViewHolder {
         CircleImageView img;
-        TextView name, dateOfBirth;
+        TextView name, dateOfBirth, gender;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.profilePic);
             name = itemView.findViewById(R.id.patientName);
             dateOfBirth = itemView.findViewById(R.id.dateOfBirth);
+            gender = itemView.findViewById(R.id.gender);
         }
     }
 }

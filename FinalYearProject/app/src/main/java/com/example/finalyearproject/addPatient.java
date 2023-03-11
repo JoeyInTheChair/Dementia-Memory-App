@@ -1,54 +1,116 @@
 package com.example.finalyearproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class addPatient extends AppCompatActivity {
 
-    EditText etDate;
+    EditText inputFirstName, inputLastName, inputDescription;
+    TextView inputDateOfBirth;
     Calendar calendar;
+    DatePickerDialog.OnDateSetListener setListener;
+    String[] genders = {"Male", "Female", "Other", "Prefer Not to Say"};
+    AutoCompleteTextView inputGender;
+    ArrayAdapter<String> genderList;
+    private String firstName, lastName, dateOfBirth, gender, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_patient);
 
-        etDate = findViewById(R.id.patient_date_of_birth);
+        assignValues();
+        createScrollCalender();
+        genderDropBar();
+
+
+        Button addPatientToDB = findViewById(R.id.add_patient_to_db);
+        addPatientToDB.setOnClickListener(view -> {
+            returnToListOfPatients();
+            getPatientDetails();
+            System.out.println("[INFO]: Name: " + firstName + " " + lastName + ", DoB: " + dateOfBirth + ", Gender: " + gender + ", desc: " + description);
+            insertData();
+        });
+
+        Button cancelAddingPatient = findViewById(R.id.cancel);
+        cancelAddingPatient.setOnClickListener(v -> returnToListOfPatients());
+    }
+
+    private void insertData() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("firstName", firstName);
+        map.put("lastName", lastName);
+        map.put("dateOfBirth", dateOfBirth);
+        map.put("gender", gender);
+        map.put("description", description);
+
+        FirebaseDatabase.getInstance().getReference().child("patient").push()
+                .setValue(map)
+                .addOnSuccessListener(unused -> Toast.makeText(addPatient.this, "New Patient Added Successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(addPatient.this, "Failed to Add Patient", Toast.LENGTH_SHORT).show());
+    }
+
+    private void genderDropBar() {
+        genderList = new ArrayAdapter<>(this, R.layout.gender_list, genders);
+        inputGender.setAdapter(genderList);
+    }
+
+    private void createScrollCalender() {
         calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        etDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        addPatient.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int day) {
-                        month = month + 1;
-                        String date = day + "/" + month + "/" + year;
-                        etDate.setText(date);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
+        inputDateOfBirth.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    addPatient.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    setListener, year, month, day);
+            datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            datePickerDialog.show();
+
         });
 
-        Button button1 = findViewById(R.id.add_patient_to_db);
-        button1.setOnClickListener(v -> returnToListOfPatients());
+        setListener = (view, year1, month1, dayOfMonth) -> {
+            month1 = month1 +1;
+            String date = day + "/" + month1 + "/" + year1;
+            inputDateOfBirth.setText(date);
+        };
+    }
 
-        Button button2 = findViewById(R.id.cancel);
-        button2.setOnClickListener(v -> returnToListOfPatients());
+    private void assignValues() {
+        inputFirstName = findViewById(R.id.patientFirstName);
+        inputLastName = findViewById(R.id.patientLastName);
+        inputDescription = findViewById(R.id.patientDescription);
+        inputDateOfBirth = findViewById(R.id.patient_date_of_birth);
+        inputGender = findViewById(R.id.gender);
+    }
+
+    public void getPatientDetails() {
+        firstName = inputFirstName.getText().toString();
+        lastName = inputLastName.getText().toString();
+        dateOfBirth = inputDateOfBirth.getText().toString();
+        gender = inputGender.getText().toString();
+        if (TextUtils.isEmpty(inputDescription.getText().toString()))
+            description = "N/A";
+        else description = inputDescription.getText().toString();
     }
 
     public void returnToListOfPatients() {

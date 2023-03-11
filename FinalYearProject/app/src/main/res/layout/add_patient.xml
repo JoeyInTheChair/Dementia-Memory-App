@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,15 +13,13 @@
         android:layout_height="77dp"
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="338dp"
         android:layout_marginRight="338dp"
-        android:layout_marginBottom="194dp"
         android:text="@android:string/cancel"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         app:backgroundTint="#9A3838"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add_patient_to_db"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patientDescription" />
@@ -31,15 +30,13 @@
         android:layout_height="77dp"
         android:layout_marginStart="619dp"
         android:layout_marginLeft="619dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="70dp"
         android:layout_marginRight="70dp"
-        android:layout_marginBottom="194dp"
         android:text="@string/add_patient"
         android:textColor="#0097A7"
         android:textSize="25sp"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patientDescription" />
@@ -62,8 +59,9 @@
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patient_date_of_birth" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/addPatientTitle"
@@ -118,11 +116,33 @@
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patientFirstName" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="685dp"
+        android:layout_height="90dp"
+        android:layout_margin="25dp"
+        android:layout_marginTop="40dp"
+        android:background="#FFFFFF"
+        android:ems="15"
+        android:hint="Click and Select Gender"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        app:layout_constraintTop_toBottomOf="@+id/patient_date_of_birth">
+
+        <AutoCompleteTextView
+            android:id="@+id/gender"
+            android:textSize="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
         android:id="@+id/patient_date_of_birth"
         android:layout_width="685dp"
         android:layout_height="90dp"
@@ -134,7 +154,6 @@
         android:background="#FFFFFF"
         android:ems="15"
         android:hint="@string/date_of_birth"
-        android:inputType="textPersonName"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
