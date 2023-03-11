@@ -26,7 +26,6 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull patientModel model) {
-        System.out.println("[INFO]: " + model.getFirstName() + " " + model.getFirstName());
         holder.name.setText(model.getFirstName() + " " + model.getLastName());
         holder.dateOfBirth.setText(model.getDateOfBirth());
 
