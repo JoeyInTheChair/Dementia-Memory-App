@@ -1,15 +1,15 @@
 package com.example.finalyearproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,6 +18,7 @@ public class listOfPatients extends AppCompatActivity {
 
     RecyclerView recyclerView;
     PatientListAdapter adapter;
+    private PatientListAdapter.RecyclerViewClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,29 @@ public class listOfPatients extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<patientModel>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("patient"), patientModel.class)
                         .build();
-
-        adapter = new PatientListAdapter(options);
+        setOnClickListener();
+        adapter = new PatientListAdapter(options, listener);
         recyclerView.setAdapter(adapter);
 
         Button button = findViewById(R.id.add_patient);
         button.setOnClickListener(v -> openAddPatient());
+    }
+
+    private void setOnClickListener() {
+        listener = (v, pos) -> {
+            Intent intent = new Intent(getApplicationContext(), patientProfile.class);
+            String firstName = adapter.getItem(pos).getFirstName();
+            String lastName = adapter.getItem(pos).getLastName();
+            String gender = adapter.getItem(pos).getGender();
+            String dateOfBirth = adapter.getItem(pos).getDateOfBirth();
+            String desc = adapter.getItem(pos).getDescription();
+            intent.putExtra("firstName", firstName);
+            intent.putExtra("lastName", lastName);
+            intent.putExtra("gender", gender);
+            intent.putExtra("DoB", dateOfBirth);
+            intent.putExtra("Description", desc);
+            startActivity(intent);
+        };
     }
 
     public void openAddPatient() {
@@ -83,7 +101,7 @@ public class listOfPatients extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<patientModel>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("patient").orderByChild("firstName").startAt(str).endAt(str+"~"), patientModel.class)
                         .build();
-        adapter = new PatientListAdapter(options);
+        adapter = new PatientListAdapter(options, listener);
         adapter.startListening();
         recyclerView.setAdapter(adapter);
     }

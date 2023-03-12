@@ -19,16 +19,22 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
      * {@link FirebaseRecyclerOptions} for configuration options.
      *
      */
-    public PatientListAdapter(@NonNull FirebaseRecyclerOptions<patientModel> options) {
+    public String fullName, dateOfBirth, gender, description;
+    RecyclerViewClickListener listener;
+    public PatientListAdapter(@NonNull FirebaseRecyclerOptions<patientModel> options, RecyclerViewClickListener listener) {
         super(options);
+        this.listener = listener;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull patientModel model) {
-        String fullName = model.getFirstName() + " " + model.getLastName();
+        fullName = model.getFirstName() + " " + model.getLastName();
+        dateOfBirth = model.getDateOfBirth();
+        gender = model.getGender();
+        description = model.getDescription();
         holder.name.setText(fullName);
-        holder.dateOfBirth.setText(model.getDateOfBirth());
-        holder.gender.setText(model.getGender());
+        holder.dateOfBirth.setText(dateOfBirth);
+        holder.gender.setText(gender);
     }
 
     @NonNull
@@ -38,7 +44,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
         return new myViewHolder(view);
     }
 
-    public static class myViewHolder extends RecyclerView.ViewHolder {
+    public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CircleImageView img;
         TextView name, dateOfBirth, gender;
 
@@ -48,6 +54,16 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
             name = itemView.findViewById(R.id.patientName);
             dateOfBirth = itemView.findViewById(R.id.dateOfBirth);
             gender = itemView.findViewById(R.id.gender);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view, getAbsoluteAdapterPosition());
+        }
+    }
+
+    public interface RecyclerViewClickListener {
+        void onClick(View v, int pos);
     }
 }
