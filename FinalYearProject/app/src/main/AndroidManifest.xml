@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalYearProject">
         <activity
+            android:name=".QuestionTwo"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionOne"
+            android:exported="false" />
+        <activity
+            android:name=".startGame"
+            android:exported="false" />
+        <activity
             android:name=".patientProfile"
             android:exported="false" />
         <activity

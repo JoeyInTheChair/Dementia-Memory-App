@@ -11,7 +11,7 @@ public class patientProfile extends AppCompatActivity {
 
     TextView patientName, patientDescription;
     String name, description;
-    Button returnToList;
+    Button returnToList, start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class patientProfile extends AppCompatActivity {
         patientName = findViewById(R.id.patient_name);
         patientDescription = findViewById(R.id.patient_desc);
         returnToList = findViewById(R.id.return_to_list);
+        start = findViewById(R.id.go_quiz);
 
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null) {
@@ -33,6 +34,13 @@ public class patientProfile extends AppCompatActivity {
         patientDescription.setText(description);
 
         returnToList.setOnClickListener(v -> openListOfPatients());
+        start.setOnClickListener(v -> openStartGame());
+    }
+
+    private void openStartGame() {
+        Intent intent = new Intent(this, startGame.class);
+        intent.putExtra("name", name);
+        startActivity(intent);
     }
 
     public void openListOfPatients() {
