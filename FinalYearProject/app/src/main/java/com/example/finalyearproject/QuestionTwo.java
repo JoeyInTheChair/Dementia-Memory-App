@@ -69,9 +69,7 @@ public class QuestionTwo extends AppCompatActivity {
             }
         });
 
-        continueButton.setOnClickListener(view -> {
-            continueToQuestionThree();
-        });
+        continueButton.setOnClickListener(view -> continueToQuestionThree());
     }
     public void continueToQuestionThree() {
         Intent intent = new Intent(this, questionThree.class);

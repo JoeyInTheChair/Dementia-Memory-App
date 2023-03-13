@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalYearProject">
         <activity
+            android:name=".questionFour"
+            android:exported="false" />
+        <activity
             android:name=".questionThree"
             android:exported="false" />
         <activity

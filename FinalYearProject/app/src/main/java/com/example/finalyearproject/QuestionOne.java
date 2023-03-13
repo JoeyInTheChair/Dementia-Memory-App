@@ -116,27 +116,27 @@ public class QuestionOne extends AppCompatActivity {
     private void showImageList() {
         int [] randomNumbers = new int [5];
         shuffleList(this.imageList);
-        for (int i = 0; i < 30; i++) {
-            randomNumbers[0] = (int)(Math.random()*30)+1;
+        for (int i = 0; i < 29; i++) {
+            randomNumbers[0] = (int)(Math.random()*29)+1;
 
             while (randomNumbers[1] == randomNumbers[0])
             {
-                randomNumbers[1] = (int)(Math.random()*30)+1;
+                randomNumbers[1] = (int)(Math.random()*39)+1;
             }
             while ((randomNumbers[2] == randomNumbers[1]) || (randomNumbers[2] == randomNumbers[0]) )
             {
-                randomNumbers[2] = (int)(Math.random()*30)+1;
+                randomNumbers[2] = (int)(Math.random()*29)+1;
             }
             while ((randomNumbers[3] == randomNumbers[0]) || (randomNumbers[3] == randomNumbers[1]) || (randomNumbers[3] == randomNumbers[2]) )
             {
-                randomNumbers[3] = (int)(Math.random()*30)+1;
+                randomNumbers[3] = (int)(Math.random()*29)+1;
             }
             while ((randomNumbers[4] == randomNumbers[0]) ||
                     (randomNumbers[4] == randomNumbers[1]) ||
                     (randomNumbers[4] == randomNumbers[2]) ||
                     (randomNumbers[4] == randomNumbers[3]) )
             {
-                randomNumbers[4] = (int)(Math.random()*30)+1;
+                randomNumbers[4] = (int)(Math.random()*29)+1;
             }
 
         }

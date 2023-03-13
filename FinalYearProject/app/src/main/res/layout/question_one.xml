@@ -72,7 +72,7 @@
         android:layout_marginLeft="175dp"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="57dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/circle_outline"
         android:text="X"
         android:textSize="70sp"
         app:backgroundTint="#FF0000"

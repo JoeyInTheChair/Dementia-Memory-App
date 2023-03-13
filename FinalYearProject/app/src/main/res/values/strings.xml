@@ -16,4 +16,7 @@
     <string name="click_here">Click Here</string>
     <string name="add_new_patient">Add New Patient</string>
     <string name="search">Search</string>
+    <string name="tap_one_circle_to_another_starting_at_1_and_alternating_number_to_letter_in_order_ending_at_f">Tap One Circle To Another Starting at 1 and Alternating Number to Letter in Order Ending at F</string>
+    <string name="reset">Reset</string>
+    <string name="continueBtn">Continue</string>
 </resources>
