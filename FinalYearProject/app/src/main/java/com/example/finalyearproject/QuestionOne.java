@@ -60,9 +60,7 @@ public class QuestionOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_one);
 
-        Bundle patientName = getIntent().getExtras();
-        if(patientName != null)
-            name = patientName.getString("name");
+        retrieveBundleInformation();
 
         assignVariables();
         showImageList();
@@ -94,17 +92,23 @@ public class QuestionOne extends AppCompatActivity {
 
     }
 
+    private void retrieveBundleInformation() {
+        Bundle patientName = getIntent().getExtras();
+        if(patientName != null)
+            name = patientName.getString("name");
+    }
+
     private void continueToQuestionTwo() {
         Intent intent = new Intent(this, QuestionTwo.class);
         intent.putExtra("name", name);
         intent.putExtra("questionOne", score);
-        System.out.println("[RESULT]: " + score);
+        System.out.println("[RESULT]: " + name + " scored a result of " + score + " in question 1");
         startActivity(intent);
     }
 
     private void finishGame() {
-        correct.setVisibility(View.INVISIBLE);
-        incorrect.setVisibility(View.INVISIBLE);
+        correct.setEnabled(false);
+        incorrect.setEnabled(false);
         imageView.setVisibility(View.INVISIBLE);
         continueButton.setVisibility(View.VISIBLE);
     }
@@ -112,28 +116,27 @@ public class QuestionOne extends AppCompatActivity {
     private void showImageList() {
         int [] randomNumbers = new int [5];
         shuffleList(this.imageList);
-        int listSize = this.imageList.size();
-        for (int i = 0; i < listSize; i++) {
-            randomNumbers[0] = (int)(Math.random()*listSize)+1;
+        for (int i = 0; i < 30; i++) {
+            randomNumbers[0] = (int)(Math.random()*30)+1;
 
             while (randomNumbers[1] == randomNumbers[0])
             {
-                randomNumbers[1] = (int)(Math.random()*listSize)+1;
+                randomNumbers[1] = (int)(Math.random()*30)+1;
             }
             while ((randomNumbers[2] == randomNumbers[1]) || (randomNumbers[2] == randomNumbers[0]) )
             {
-                randomNumbers[2] = (int)(Math.random()*listSize)+1;
+                randomNumbers[2] = (int)(Math.random()*30)+1;
             }
             while ((randomNumbers[3] == randomNumbers[0]) || (randomNumbers[3] == randomNumbers[1]) || (randomNumbers[3] == randomNumbers[2]) )
             {
-                randomNumbers[3] = (int)(Math.random()*listSize)+1;
+                randomNumbers[3] = (int)(Math.random()*30)+1;
             }
             while ((randomNumbers[4] == randomNumbers[0]) ||
                     (randomNumbers[4] == randomNumbers[1]) ||
                     (randomNumbers[4] == randomNumbers[2]) ||
                     (randomNumbers[4] == randomNumbers[3]) )
             {
-                randomNumbers[4] = (int)(Math.random()*listSize)+1;
+                randomNumbers[4] = (int)(Math.random()*30)+1;
             }
 
         }
