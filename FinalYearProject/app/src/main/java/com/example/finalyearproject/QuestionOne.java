@@ -16,7 +16,7 @@ import java.util.List;
 public class QuestionOne extends AppCompatActivity {
     private ImageView imageView;
     private Button correct, incorrect, continueButton;
-    private String name;
+    private String firstName, lastName, gender, dateOfBirth, desc;
     private int score = 0;
 
     private final Integer[] viewImage = {
@@ -95,15 +95,24 @@ public class QuestionOne extends AppCompatActivity {
 
     private void retrieveBundleInformation() {
         Bundle patientName = getIntent().getExtras();
-        if(patientName != null)
-            name = patientName.getString("name");
+        if(patientName != null) {
+            firstName = patientName.getString("firstName");
+            lastName = patientName.getString("lastName");
+            dateOfBirth = patientName.getString("DoB");
+            gender = patientName.getString("gender");
+            desc = patientName.getString("description");
+        }
+
     }
 
     private void continueToQuestionTwo() {
         Intent intent = new Intent(this, QuestionTwo.class);
-        intent.putExtra("name", name);
+        intent.putExtra("firstName", firstName);
+        intent.putExtra("lastName", lastName);
+        intent.putExtra("DoB", dateOfBirth);
+        intent.putExtra("gender", gender);
+        intent.putExtra("description", desc);
         intent.putExtra("questionOne", score);
-        System.out.println("[RESULT]: " + name + " scored a result of " + score + " in question 1");
         startActivity(intent);
     }
 

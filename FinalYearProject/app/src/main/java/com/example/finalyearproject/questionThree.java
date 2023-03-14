@@ -14,7 +14,7 @@ public class QuestionThree extends AppCompatActivity {
     private final Button[] circleButtons = new Button[12];
     private final String [] text = {"1", "A", "2", "B", "3", "C", "4", "D", "5", "E", "6", "F"};
     private final List<String> answer = new ArrayList<>();
-    private String name = "";
+    private String firstName, lastName, gender, dateOfBirth, desc;
     private Button continueButton, resetButton;
     private int score = 0, questionOne = 0, questionTwo = 0;
 
@@ -55,18 +55,25 @@ public class QuestionThree extends AppCompatActivity {
 
     public void continueToQuestionFour() {
         Intent intent = new Intent(this, QuestionFour.class);
-        intent.putExtra("name", name);
+        intent.putExtra("firstName", firstName);
+        intent.putExtra("lastName", lastName);
+        intent.putExtra("DoB", dateOfBirth);
+        intent.putExtra("gender", gender);
+        intent.putExtra("description", desc);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", questionTwo);
         intent.putExtra("questionThree", score);
-        System.out.println("[INFO] " + name + " scored a result of " + score + " in question 3");
         startActivity(intent);
     }
 
     private void retrieveBundleInformation() {
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null){
-            name = patientInfo.getString("name");
+            firstName = patientInfo.getString("firstName");
+            lastName = patientInfo.getString("lastName");
+            dateOfBirth = patientInfo.getString("DoB");
+            gender = patientInfo.getString("gender");
+            desc = patientInfo.getString("description");
             questionOne = patientInfo.getInt("questionOne");
             questionTwo = patientInfo.getInt("questionTwo");
         }

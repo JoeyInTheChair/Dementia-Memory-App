@@ -25,7 +25,7 @@ public class QuestionTwo extends AppCompatActivity {
     private int score = 0, pos = 0, questionOne = 0;
     private final String guess = "Guess this word";
     private final SpannableString spannableString = new SpannableString(guess);
-    private String name = "";
+    private String firstName, lastName, gender, dateOfBirth, desc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,17 +73,24 @@ public class QuestionTwo extends AppCompatActivity {
     }
     public void continueToQuestionThree() {
         Intent intent = new Intent(this, QuestionThree.class);
-        intent.putExtra("name", name);
+        intent.putExtra("firstName", firstName);
+        intent.putExtra("lastName", lastName);
+        intent.putExtra("DoB", dateOfBirth);
+        intent.putExtra("gender", gender);
+        intent.putExtra("description", desc);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", score);
-        System.out.println("[INFO] " + name + " scored a result of " + score + " in question 2");
         startActivity(intent);
     }
 
     private void retrieveBundleInformation() {
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null){
-            name = patientInfo.getString("name");
+            firstName = patientInfo.getString("firstName");
+            lastName = patientInfo.getString("lastName");
+            dateOfBirth = patientInfo.getString("DoB");
+            gender = patientInfo.getString("gender");
+            desc = patientInfo.getString("description");
             questionOne = patientInfo.getInt("questionOne");
         }
     }

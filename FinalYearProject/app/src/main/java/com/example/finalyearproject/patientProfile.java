@@ -11,6 +11,7 @@ public class PatientProfile extends AppCompatActivity {
 
     TextView patientName, patientDescription;
     String name, description;
+    private String firstName, lastName, dateOfBirth, gender, desc;
     Button returnToList, start;
 
     @Override
@@ -25,10 +26,13 @@ public class PatientProfile extends AppCompatActivity {
 
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null) {
-            name = patientInfo.getString("firstName") + " " + patientInfo.getString("lastName");
-            description = patientInfo.getString("gender") + "\n";
-            description += patientInfo.getString("DoB") + "\n";
-            description += patientInfo.getString("Description");
+            firstName = patientInfo.getString("firstName");
+            lastName = patientInfo.getString("lastName");
+            dateOfBirth = patientInfo.getString("DoB");
+            gender = patientInfo.getString("gender");
+            desc = patientInfo.getString("Description");
+            name = firstName + " " + lastName;
+            description = gender + "\n" + dateOfBirth + "\n" + desc;
         }
         patientName.setText(name);
         patientDescription.setText(description);
@@ -39,7 +43,11 @@ public class PatientProfile extends AppCompatActivity {
 
     private void openStartGame() {
         Intent intent = new Intent(this, StartGame.class);
-        intent.putExtra("name", name);
+        intent.putExtra("firstName", firstName);
+        intent.putExtra("lastName", lastName);
+        intent.putExtra("DoB", dateOfBirth);
+        intent.putExtra("gender", gender);
+        intent.putExtra("description", desc);
         startActivity(intent);
     }
 

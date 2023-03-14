@@ -15,7 +15,7 @@ public class QuestionFive extends AppCompatActivity {
     private Button continueButton;
     private EditText answer;
     private int score = 0, input = 0, questionOne = 0, questionTwo = 0, questionThree = 0, questionFour = 0;
-    private String name = "";
+    private String firstName, lastName, gender, dateOfBirth, desc;
     private final int val = (int) (Math.random() * 50) + 1;
 
     @Override
@@ -43,13 +43,16 @@ public class QuestionFive extends AppCompatActivity {
 
     public void continueToEvaluation() {
         Intent intent = new Intent(this, EvaluatePage.class);
-        intent.putExtra("name", name);
+        intent.putExtra("firstName", firstName);
+        intent.putExtra("lastName", lastName);
+        intent.putExtra("DoB", dateOfBirth);
+        intent.putExtra("gender", gender);
+        intent.putExtra("description", desc);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", questionTwo);
         intent.putExtra("questionThree", questionThree);
         intent.putExtra("questionFour", questionFour);
         intent.putExtra("questionFive", score);
-        System.out.println("[INFO] " + name + " scored a result of " + score + " in question 5");
         startActivity(intent);
     }
 
@@ -87,7 +90,11 @@ public class QuestionFive extends AppCompatActivity {
     private void retrieveBundleInformation() {
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null){
-            name = patientInfo.getString("name");
+            firstName = patientInfo.getString("firstName");
+            lastName = patientInfo.getString("lastName");
+            dateOfBirth = patientInfo.getString("DoB");
+            gender = patientInfo.getString("gender");
+            desc = patientInfo.getString("description");
             questionOne = patientInfo.getInt("questionOne");
             questionTwo = patientInfo.getInt("questionTwo");
             questionThree = patientInfo.getInt("questionThree");
