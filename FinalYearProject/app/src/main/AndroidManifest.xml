@@ -12,13 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalYearProject">
         <activity
-            android:name=".questionFive"
+            android:name=".EvaluatePage"
             android:exported="false" />
         <activity
-            android:name=".questionFour"
+            android:name=".QuestionFive"
             android:exported="false" />
         <activity
-            android:name=".questionThree"
+            android:name=".QuestionFour"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionThree"
             android:exported="false" />
         <activity
             android:name=".QuestionTwo"
@@ -27,16 +30,16 @@
             android:name=".QuestionOne"
             android:exported="false" />
         <activity
-            android:name=".startGame"
+            android:name=".StartGame"
             android:exported="false" />
         <activity
-            android:name=".patientProfile"
+            android:name=".PatientProfile"
             android:exported="false" />
         <activity
-            android:name=".addPatient"
+            android:name=".AddPatient"
             android:exported="false" />
         <activity
-            android:name=".listOfPatients"
+            android:name=".ListOfPatients"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

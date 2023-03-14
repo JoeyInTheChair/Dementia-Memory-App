@@ -13,7 +13,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, PatientListAdapter.myViewHolder> {
+public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, PatientListAdapter.myViewHolder> {
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
@@ -21,13 +21,13 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<patientModel, Pa
      */
     public String fullName, dateOfBirth, gender, description;
     RecyclerViewClickListener listener;
-    public PatientListAdapter(@NonNull FirebaseRecyclerOptions<patientModel> options, RecyclerViewClickListener listener) {
+    public PatientListAdapter(@NonNull FirebaseRecyclerOptions<PatientModel> options, RecyclerViewClickListener listener) {
         super(options);
         this.listener = listener;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull patientModel model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull PatientModel model) {
         fullName = model.getFirstName() + " " + model.getLastName();
         dateOfBirth = model.getDateOfBirth();
         gender = model.getGender();

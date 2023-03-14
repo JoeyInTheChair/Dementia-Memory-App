@@ -54,6 +54,7 @@ public class QuestionOne extends AppCompatActivity {
 
     private final List<Integer> imageList = Arrays.asList(viewImage);
     private final List<Integer> usedImage = new ArrayList<>();
+    private final int[] pos = {0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,6 @@ public class QuestionOne extends AppCompatActivity {
         assignVariables();
         showImageList();
 
-        final int[] pos = {0};
         imageView.setImageResource(usedImage.get(pos[0]));
         pos[0]++;
 
@@ -79,6 +79,7 @@ public class QuestionOne extends AppCompatActivity {
                 pos[0]++;
             }
         });
+
         incorrect.setOnClickListener(view -> {
             if(pos[0] == 5)
                 finishGame();

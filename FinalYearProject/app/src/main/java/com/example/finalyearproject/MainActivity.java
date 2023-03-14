@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openListOfPatients() {
-        Intent intent = new Intent(this, listOfPatients.class);
+        Intent intent = new Intent(this, ListOfPatients.class);
         startActivity(intent);
     }
 }

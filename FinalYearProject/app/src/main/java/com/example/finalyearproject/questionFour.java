@@ -11,11 +11,11 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-public class questionFour extends AppCompatActivity {
+public class QuestionFour extends AppCompatActivity {
 
     private Button continueBtn;
     private final EditText[] clock = new EditText[12];
-    private List<Integer> inputValues = new ArrayList<>();
+    private final List<Integer> inputValues = new ArrayList<>();
     private String name = "";
     private int score = 0, questionOne = 0, questionTwo = 0, questionThree = 0;
 
@@ -40,7 +40,7 @@ public class questionFour extends AppCompatActivity {
     }
 
     public void continueToQuestionFive() {
-        Intent intent = new Intent(this, questionFive.class);
+        Intent intent = new Intent(this, QuestionFive.class);
         intent.putExtra("name", name);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", questionTwo);

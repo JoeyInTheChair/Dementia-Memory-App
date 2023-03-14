@@ -72,7 +72,7 @@ public class QuestionTwo extends AppCompatActivity {
         continueButton.setOnClickListener(view -> continueToQuestionThree());
     }
     public void continueToQuestionThree() {
-        Intent intent = new Intent(this, questionThree.class);
+        Intent intent = new Intent(this, QuestionThree.class);
         intent.putExtra("name", name);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", score);

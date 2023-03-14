@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class patientProfile extends AppCompatActivity {
+public class PatientProfile extends AppCompatActivity {
 
     TextView patientName, patientDescription;
     String name, description;
@@ -38,13 +38,13 @@ public class patientProfile extends AppCompatActivity {
     }
 
     private void openStartGame() {
-        Intent intent = new Intent(this, startGame.class);
+        Intent intent = new Intent(this, StartGame.class);
         intent.putExtra("name", name);
         startActivity(intent);
     }
 
     public void openListOfPatients() {
-        Intent intent = new Intent(this, listOfPatients.class);
+        Intent intent = new Intent(this, ListOfPatients.class);
         startActivity(intent);
     }
 }

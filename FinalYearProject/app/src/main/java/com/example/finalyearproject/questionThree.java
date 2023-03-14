@@ -10,11 +10,11 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class questionThree extends AppCompatActivity {
-    private Button[] circleButtons = new Button[12];
+public class QuestionThree extends AppCompatActivity {
+    private final Button[] circleButtons = new Button[12];
     private final String [] text = {"1", "A", "2", "B", "3", "C", "4", "D", "5", "E", "6", "F"};
-    private List<String> answer = new ArrayList<>();
-    private String ans = "", name = "";
+    private final List<String> answer = new ArrayList<>();
+    private String name = "";
     private Button continueButton, resetButton;
     private int score = 0, questionOne = 0, questionTwo = 0;
 
@@ -54,7 +54,7 @@ public class questionThree extends AppCompatActivity {
     }
 
     public void continueToQuestionFour() {
-        Intent intent = new Intent(this, questionFour.class);
+        Intent intent = new Intent(this, QuestionFour.class);
         intent.putExtra("name", name);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", questionTwo);
@@ -73,7 +73,7 @@ public class questionThree extends AppCompatActivity {
     }
 
     public void inputAnswer(Button button) {
-        ans = button.getText().toString();
+        String ans = button.getText().toString();
         answer.add(ans);
         button.setBackgroundResource(R.drawable.check);
         button.setEnabled(false);

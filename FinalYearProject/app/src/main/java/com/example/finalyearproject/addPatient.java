@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class addPatient extends AppCompatActivity {
+public class AddPatient extends AppCompatActivity {
 
     EditText inputFirstName, inputLastName, inputDescription;
     TextView inputDateOfBirth;
@@ -64,8 +64,8 @@ public class addPatient extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference().child("patient").push()
                 .setValue(map)
-                .addOnSuccessListener(unused -> Toast.makeText(addPatient.this, "New Patient Added Successfully", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(addPatient.this, "Failed to Add Patient", Toast.LENGTH_SHORT).show());
+                .addOnSuccessListener(unused -> Toast.makeText(AddPatient.this, "New Patient Added Successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(AddPatient.this, "Failed to Add Patient", Toast.LENGTH_SHORT).show());
     }
 
     private void genderDropBar() {
@@ -81,7 +81,7 @@ public class addPatient extends AppCompatActivity {
 
         inputDateOfBirth.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    addPatient.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    AddPatient.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                     setListener, year, month, day);
             datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             datePickerDialog.show();
@@ -114,7 +114,7 @@ public class addPatient extends AppCompatActivity {
     }
 
     public void returnToListOfPatients() {
-        Intent intent = new Intent(this, listOfPatients.class);
+        Intent intent = new Intent(this, ListOfPatients.class);
         startActivity(intent);
     }
 }

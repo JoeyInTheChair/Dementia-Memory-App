@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-public class startGame extends AppCompatActivity {
+public class StartGame extends AppCompatActivity {
     String name;
     Button startQuiz;
 

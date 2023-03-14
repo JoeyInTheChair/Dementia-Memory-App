@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class listOfPatients extends AppCompatActivity {
+public class ListOfPatients extends AppCompatActivity {
 
     RecyclerView recyclerView;
     PatientListAdapter adapter;
@@ -28,9 +28,9 @@ public class listOfPatients extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerOptions<patientModel> options =
-                new FirebaseRecyclerOptions.Builder<patientModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("patient"), patientModel.class)
+        FirebaseRecyclerOptions<PatientModel> options =
+                new FirebaseRecyclerOptions.Builder<PatientModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("patient"), PatientModel.class)
                         .build();
         setOnClickListener();
         adapter = new PatientListAdapter(options, listener);
@@ -42,7 +42,7 @@ public class listOfPatients extends AppCompatActivity {
 
     private void setOnClickListener() {
         listener = (v, pos) -> {
-            Intent intent = new Intent(getApplicationContext(), patientProfile.class);
+            Intent intent = new Intent(getApplicationContext(), PatientProfile.class);
             String firstName = adapter.getItem(pos).getFirstName();
             String lastName = adapter.getItem(pos).getLastName();
             String gender = adapter.getItem(pos).getGender();
@@ -58,7 +58,7 @@ public class listOfPatients extends AppCompatActivity {
     }
 
     public void openAddPatient() {
-        Intent intent = new Intent(this, addPatient.class);
+        Intent intent = new Intent(this, AddPatient.class);
         startActivity(intent);
     }
 
@@ -97,9 +97,9 @@ public class listOfPatients extends AppCompatActivity {
     }
 
     private void txtSearch(String str) {
-        FirebaseRecyclerOptions<patientModel> options =
-                new FirebaseRecyclerOptions.Builder<patientModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("patient").orderByChild("firstName").startAt(str).endAt(str+"~"), patientModel.class)
+        FirebaseRecyclerOptions<PatientModel> options =
+                new FirebaseRecyclerOptions.Builder<PatientModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("patient").orderByChild("firstName").startAt(str).endAt(str+"~"), PatientModel.class)
                         .build();
         adapter = new PatientListAdapter(options, listener);
         adapter.startListening();

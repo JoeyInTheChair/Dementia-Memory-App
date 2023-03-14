@@ -1,17 +1,17 @@
 package com.example.finalyearproject;
 
-public class patientModel {
+public class PatientModel {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
     private String gender;
     private String description;
 
-    patientModel() {
+    PatientModel() {
 
     }
 
-    public patientModel(String firstName, String lastName, String dateOfBirth, String gender, String description) {
+    public PatientModel(String firstName, String lastName, String dateOfBirth, String gender, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
