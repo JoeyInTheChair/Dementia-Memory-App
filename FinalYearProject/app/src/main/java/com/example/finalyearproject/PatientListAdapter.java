@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,6 +33,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
      */
     public String fullName, dateOfBirth, gender, description;
     RecyclerViewClickListener listener;
+
     public PatientListAdapter(@NonNull FirebaseRecyclerOptions<PatientModel> options, RecyclerViewClickListener listener) {
         super(options);
         this.listener = listener;
@@ -45,11 +54,62 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
             builder.setTitle("Are you sure?");
             builder.setMessage("Deleted data can't be undone");
 
-            builder.setPositiveButton("Delete", (dialogInterface, i) -> FirebaseDatabase.getInstance().getReference().child("patient")
-                    .child(getRef(position).getKey()).removeValue());
+            builder.setPositiveButton("Delete", (dialogInterface, i) -> {
+                FirebaseDatabase.getInstance().getReference().child("patient")
+                        .child(Objects.requireNonNull(getRef(position).getKey())).removeValue();
+                Toast.makeText(holder.name.getContext(), "Patient Data Deleted", Toast.LENGTH_SHORT).show();
+            });
 
             builder.setNegativeButton("Cancel", (dialogInterface, i) -> Toast.makeText(holder.name.getContext(), "Cancelled", Toast.LENGTH_SHORT).show());
             builder.show();
+        });
+
+        holder.updateButton.setOnClickListener(view -> {
+
+
+            final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
+                    .setContentHolder(new ViewHolder(R.layout.update_patient))
+                    .setExpanded(true, 2170)
+                    .create();
+
+
+            View v = dialogPlus.getHolderView();
+            EditText firstName = v.findViewById(R.id.patientFirstName);
+            EditText lastName = v.findViewById(R.id.patientLastName);
+            EditText desc = v.findViewById(R.id.patientDescription);
+            TextView dob = v.findViewById(R.id.patient_date_of_birth);
+            AutoCompleteTextView gender = v.findViewById(R.id.gender);
+            Button update = v.findViewById(R.id.updatePatientToDB);
+            Button cancel = v.findViewById(R.id.cancel);
+
+            firstName.setText(model.getFirstName());
+            lastName.setText(model.getLastName());
+            desc.setText(model.getDescription());
+            dob.setText(model.getDateOfBirth());
+            gender.setText(model.getGender());
+
+            dialogPlus.show();
+
+            update.setOnClickListener(view12 -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("firstName", firstName.getText().toString());
+                map.put("lastName", lastName.getText().toString());
+                map.put("gender", gender.getText().toString());
+                map.put("dateOfBirth", dob.getText().toString());
+                map.put("description", desc.getText().toString());
+
+                FirebaseDatabase.getInstance().getReference().child("patient")
+                        .child(Objects.requireNonNull(getRef(position).getKey())).updateChildren(map)
+                        .addOnSuccessListener(unused -> {
+                            Toast.makeText(holder.name.getContext(), "Patient's Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                            dialogPlus.dismiss();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(holder.name.getContext(), "Fail to Update Patient's Data", Toast.LENGTH_SHORT).show();
+                            dialogPlus.dismiss();
+                        });
+            });
+            cancel.setOnClickListener(view1 -> dialogPlus.dismiss());
         });
     }
 
