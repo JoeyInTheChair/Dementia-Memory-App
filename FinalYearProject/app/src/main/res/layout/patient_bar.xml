@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -54,6 +55,31 @@
             android:layout_toRightOf="@+id/profilePic"
             android:layout_marginLeft="15dp"/>
 
+        <Button
+            android:id="@+id/updatePatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gender"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            app:backgroundTint="#AAA25E"
+            android:layout_toEndOf="@+id/profilePic"
+            android:layout_toRightOf="@+id/profilePic"
+            android:text="Update"
+            android:textSize="30dp"/>
+
+        <Button
+            android:id="@+id/deletePatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gender"
+            android:layout_marginLeft="400dp"
+            android:layout_marginTop="10dp"
+            app:backgroundTint="#A12323"
+            android:layout_toEndOf="@+id/profilePic"
+            android:layout_toRightOf="@+id/profilePic"
+            android:text="Delete"
+            android:textSize="30dp"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

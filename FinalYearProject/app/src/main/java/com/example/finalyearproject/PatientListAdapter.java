@@ -1,15 +1,19 @@
 package com.example.finalyearproject;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,6 +39,18 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
         holder.name.setText(fullName);
         holder.dateOfBirth.setText(dateOfBirth);
         holder.gender.setText(gender);
+
+        holder.deleteButton.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
+            builder.setTitle("Are you sure?");
+            builder.setMessage("Deleted data can't be undone");
+
+            builder.setPositiveButton("Delete", (dialogInterface, i) -> FirebaseDatabase.getInstance().getReference().child("patient")
+                    .child(getRef(position).getKey()).removeValue());
+
+            builder.setNegativeButton("Cancel", (dialogInterface, i) -> Toast.makeText(holder.name.getContext(), "Cancelled", Toast.LENGTH_SHORT).show());
+            builder.show();
+        });
     }
 
     @NonNull
@@ -47,6 +63,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
     public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CircleImageView img;
         TextView name, dateOfBirth, gender;
+        Button updateButton, deleteButton;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +71,9 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
             name = itemView.findViewById(R.id.patientName);
             dateOfBirth = itemView.findViewById(R.id.dateOfBirth);
             gender = itemView.findViewById(R.id.gender);
+            updateButton = itemView.findViewById(R.id.updatePatient);
+            deleteButton = itemView.findViewById(R.id.deletePatient);
+
             itemView.setOnClickListener(this);
         }
 

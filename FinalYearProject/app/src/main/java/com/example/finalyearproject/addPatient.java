@@ -42,11 +42,10 @@ public class AddPatient extends AppCompatActivity {
         genderDropBar();
 
 
-        Button addPatientToDB = findViewById(R.id.add_patient_to_db);
+        Button addPatientToDB = findViewById(R.id.updatePatientToDB);
         addPatientToDB.setOnClickListener(view -> {
             returnToListOfPatients();
             getPatientDetails();
-            System.out.println("[INFO]: Name: " + firstName + " " + lastName + ", DoB: " + dateOfBirth + ", Gender: " + gender + ", desc: " + description);
             insertData();
         });
 
