@@ -15,8 +15,7 @@ public class QuestionFive extends AppCompatActivity {
     private Button continueButton;
     private EditText answer;
     private int score = 0, input = 0, questionOne = 0, questionTwo = 0, questionThree = 0, questionFour = 0;
-    private String firstName, lastName, gender, dateOfBirth, desc;
-    private final int val = (int) (Math.random() * 50) + 1;
+    private String firstName, lastName, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +25,12 @@ public class QuestionFive extends AppCompatActivity {
         retrieveBundleInformation();
         sortIds();
 
-        setValue(x, val);
-        setValue(y, val-5);
+        //make random values for x and y value in xml file
+        String xVal = Integer.toString((int)(Math.random() * 49) + 1);
+        String yVal = Integer.toString((int)(Math.random() * Integer.parseInt(xVal) - 1) + 1);
+
+        x.setText(xVal);
+        y.setText(yVal);
 
         continueButton.setOnClickListener(view -> {
             if(checkValidation()) {
@@ -41,13 +44,12 @@ public class QuestionFive extends AppCompatActivity {
         });
     }
 
+    //move to next page, and store new result
     public void continueToEvaluation() {
         Intent intent = new Intent(this, EvaluatePage.class);
         intent.putExtra("firstName", firstName);
         intent.putExtra("lastName", lastName);
-        intent.putExtra("DoB", dateOfBirth);
-        intent.putExtra("gender", gender);
-        intent.putExtra("description", desc);
+        intent.putExtra("id", id);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", questionTwo);
         intent.putExtra("questionThree", questionThree);
@@ -56,6 +58,7 @@ public class QuestionFive extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //check if user input is the correct answer
     private void checkAnswer(int input) {
         int xValue = Integer.parseInt(x.getText().toString());
         int yValue = Integer.parseInt(y.getText().toString());
@@ -70,16 +73,12 @@ public class QuestionFive extends AppCompatActivity {
         return !TextUtils.isEmpty(answer.getText().toString());
     }
 
+    //alert user if they did not type in an appropriate answer
     public void alert() {
         if (TextUtils.isEmpty(answer.getText().toString())) answer.setError("Input Needed");
     }
 
-    public void setValue(TextView text, int x) {
-        int val = (int) (Math.random() * x) + 1;
-        String value = Integer.toString(val);
-        text.setText(value);
-    }
-
+    //sort out ids from xml file
     private void sortIds() {
         x = findViewById(R.id.xValue);
         y = findViewById(R.id.yValue);
@@ -87,14 +86,13 @@ public class QuestionFive extends AppCompatActivity {
         continueButton = findViewById(R.id.continueToEndPage);
     }
 
+    //retrieve previous information from last page and store in appropriately named variables
     private void retrieveBundleInformation() {
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null){
             firstName = patientInfo.getString("firstName");
             lastName = patientInfo.getString("lastName");
-            dateOfBirth = patientInfo.getString("DoB");
-            gender = patientInfo.getString("gender");
-            desc = patientInfo.getString("description");
+            id = patientInfo.getString("id");
             questionOne = patientInfo.getInt("questionOne");
             questionTwo = patientInfo.getInt("questionTwo");
             questionThree = patientInfo.getInt("questionThree");

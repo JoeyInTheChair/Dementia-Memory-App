@@ -32,13 +32,28 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
      *
      */
     public String fullName, dateOfBirth, gender, description;
-    RecyclerViewClickListener listener;
+    private final RecyclerViewClickListener listener;
 
     public PatientListAdapter(@NonNull FirebaseRecyclerOptions<PatientModel> options, RecyclerViewClickListener listener) {
         super(options);
         this.listener = listener;
     }
 
+    //pulls user's unique id
+    public String getUniqueId(int pos) {
+        String n = String.valueOf(FirebaseDatabase.getInstance().getReference().child("patient").child(Objects.requireNonNull(getRef(pos).getKey())));
+        String key = "";
+        for(int i = n.length()-1; i >= 0; i--) {
+            if (n.charAt(i) == '/') {
+                key = n.substring(i+1);
+                break;
+            }
+        }
+        return key;
+    }
+
+    //shows all important data on screen
+    //sets the text for each user bar i.e. full name, date of birth, gender
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull PatientModel model) {
         fullName = model.getFirstName() + " " + model.getLastName();
@@ -48,71 +63,84 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
         holder.name.setText(fullName);
         holder.dateOfBirth.setText(dateOfBirth);
         holder.gender.setText(gender);
-
+        
         holder.deleteButton.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
-            builder.setTitle("Are you sure?");
-            builder.setMessage("Deleted data can't be undone");
-
-            builder.setPositiveButton("Delete", (dialogInterface, i) -> {
-                FirebaseDatabase.getInstance().getReference().child("patient")
-                        .child(Objects.requireNonNull(getRef(position).getKey())).removeValue();
-                Toast.makeText(holder.name.getContext(), "Patient Data Deleted", Toast.LENGTH_SHORT).show();
-            });
-
-            builder.setNegativeButton("Cancel", (dialogInterface, i) -> Toast.makeText(holder.name.getContext(), "Cancelled", Toast.LENGTH_SHORT).show());
-            builder.show();
+            deletePatientInfo(holder, position);
         });
 
         holder.updateButton.setOnClickListener(view -> {
 
-
-            final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
-                    .setContentHolder(new ViewHolder(R.layout.update_patient))
-                    .setExpanded(true, 2170)
-                    .create();
-
-
-            View v = dialogPlus.getHolderView();
-            EditText firstName = v.findViewById(R.id.patientFirstName);
-            EditText lastName = v.findViewById(R.id.patientLastName);
-            EditText desc = v.findViewById(R.id.patientDescription);
-            TextView dob = v.findViewById(R.id.patient_date_of_birth);
-            AutoCompleteTextView gender = v.findViewById(R.id.gender);
-            Button update = v.findViewById(R.id.updatePatientToDB);
-            Button cancel = v.findViewById(R.id.cancel);
-
-            firstName.setText(model.getFirstName());
-            lastName.setText(model.getLastName());
-            desc.setText(model.getDescription());
-            dob.setText(model.getDateOfBirth());
-            gender.setText(model.getGender());
-
-            dialogPlus.show();
-
-            update.setOnClickListener(view12 -> {
-                Map<String, Object> map = new HashMap<>();
-                map.put("firstName", firstName.getText().toString());
-                map.put("lastName", lastName.getText().toString());
-                map.put("gender", gender.getText().toString());
-                map.put("dateOfBirth", dob.getText().toString());
-                map.put("description", desc.getText().toString());
-
-                FirebaseDatabase.getInstance().getReference().child("patient")
-                        .child(Objects.requireNonNull(getRef(position).getKey())).updateChildren(map)
-                        .addOnSuccessListener(unused -> {
-                            Toast.makeText(holder.name.getContext(), "Patient's Data Updated Successfully", Toast.LENGTH_SHORT).show();
-                            dialogPlus.dismiss();
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(holder.name.getContext(), "Fail to Update Patient's Data", Toast.LENGTH_SHORT).show();
-                            dialogPlus.dismiss();
-                        });
-            });
-            cancel.setOnClickListener(view1 -> dialogPlus.dismiss());
+            updateUserInfo(holder, position, model);
         });
     }
 
+    //when user clicks update button, runs this operation
+    //pulls up update page, and user is able to make any changes to the user's personal information
+    private void updateUserInfo(@NonNull myViewHolder holder, int position, @NonNull PatientModel model) {
+        final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
+                .setContentHolder(new ViewHolder(R.layout.update_patient))
+                .setExpanded(true, 2170)
+                .create();
+
+        View v = dialogPlus.getHolderView();
+        EditText firstName = v.findViewById(R.id.patientFirstName);
+        EditText lastName = v.findViewById(R.id.patientLastName);
+        EditText desc = v.findViewById(R.id.patientDescription);
+        TextView dob = v.findViewById(R.id.patient_date_of_birth);
+        AutoCompleteTextView gender = v.findViewById(R.id.gender);
+        Button update = v.findViewById(R.id.updatePatientToDB);
+        Button cancel = v.findViewById(R.id.cancel);
+
+        firstName.setText(model.getFirstName());
+        lastName.setText(model.getLastName());
+        desc.setText(model.getDescription());
+        dob.setText(model.getDateOfBirth());
+        gender.setText(model.getGender());
+
+        dialogPlus.show();
+
+        //after user is done updating any information of the patient,
+        //it is then pushed inside the database updating all previous information
+        update.setOnClickListener(view12 -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("firstName", firstName.getText().toString());
+            map.put("lastName", lastName.getText().toString());
+            map.put("gender", gender.getText().toString());
+            map.put("dateOfBirth", dob.getText().toString());
+            map.put("description", desc.getText().toString());
+
+            FirebaseDatabase.getInstance().getReference().child("patient")
+                    .child(Objects.requireNonNull(getRef(position).getKey())).updateChildren(map)
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(holder.name.getContext(), "Patient's Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                        dialogPlus.dismiss();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(holder.name.getContext(), "Fail to Update Patient's Data", Toast.LENGTH_SHORT).show();
+                        dialogPlus.dismiss();
+                    });
+        });
+        cancel.setOnClickListener(view1 -> dialogPlus.dismiss());
+    }
+
+    //when user presses delete button it runs this operation
+    //i.e deletes all users data inside database
+    private void deletePatientInfo(@NonNull myViewHolder holder, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
+        builder.setTitle("Are you sure?");
+        builder.setMessage("Deleted data can't be undone");
+
+        builder.setPositiveButton("Delete", (dialogInterface, i) -> {
+            FirebaseDatabase.getInstance().getReference().child("patient")
+                    .child(Objects.requireNonNull(getRef(position).getKey())).removeValue();
+            Toast.makeText(holder.name.getContext(), "Patient Data Deleted", Toast.LENGTH_SHORT).show();
+        });
+
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> Toast.makeText(holder.name.getContext(), "Cancelled", Toast.LENGTH_SHORT).show());
+        builder.show();
+    }
+
+    //gets the patient bar xml file, and adds all the required information and adds it to the list of patient class
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

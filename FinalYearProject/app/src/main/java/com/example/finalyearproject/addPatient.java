@@ -23,13 +23,11 @@ import java.util.Map;
 
 public class AddPatient extends AppCompatActivity {
 
-    EditText inputFirstName, inputLastName, inputDescription;
-    TextView inputDateOfBirth;
-    Calendar calendar;
-    DatePickerDialog.OnDateSetListener setListener;
-    String[] genders = {"Male", "Female", "Other", "Prefer Not to Say"};
-    AutoCompleteTextView inputGender;
-    ArrayAdapter<String> genderList;
+    private EditText inputFirstName, inputLastName, inputDescription;
+    private TextView inputDateOfBirth;
+    private DatePickerDialog.OnDateSetListener setListener;
+    private final String[] genders = {"Male", "Female", "Other", "Prefer Not to Say"};
+    private AutoCompleteTextView inputGender;
     private String firstName, lastName, dateOfBirth, gender, description;
 
     @Override
@@ -54,6 +52,7 @@ public class AddPatient extends AppCompatActivity {
     }
 
     private void insertData() {
+        //add all user data into map
         Map<String, Object> map = new HashMap<>();
         map.put("firstName", firstName);
         map.put("lastName", lastName);
@@ -61,19 +60,22 @@ public class AddPatient extends AppCompatActivity {
         map.put("gender", gender);
         map.put("description", description);
 
+        //push all user date inside "patient" database in firebase
         FirebaseDatabase.getInstance().getReference().child("patient").push()
                 .setValue(map)
                 .addOnSuccessListener(unused -> Toast.makeText(AddPatient.this, "New Patient Added Successfully", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(AddPatient.this, "Failed to Add Patient", Toast.LENGTH_SHORT).show());
     }
 
+    //drop bar is made to allow user to pick gender
     private void genderDropBar() {
-        genderList = new ArrayAdapter<>(this, R.layout.gender_list, genders);
+        ArrayAdapter<String> genderList = new ArrayAdapter<>(this, R.layout.gender_list, genders);
         inputGender.setAdapter(genderList);
     }
 
+    //creates a scroll calender, for user to pick a date for birthday
     private void createScrollCalender() {
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -94,6 +96,7 @@ public class AddPatient extends AppCompatActivity {
         };
     }
 
+    //assign values in xml file that correlates to this java class
     private void assignValues() {
         inputFirstName = findViewById(R.id.patientFirstName);
         inputLastName = findViewById(R.id.patientLastName);
@@ -102,6 +105,7 @@ public class AddPatient extends AppCompatActivity {
         inputGender = findViewById(R.id.gender);
     }
 
+    //retrieving patients details
     public void getPatientDetails() {
         firstName = inputFirstName.getText().toString();
         lastName = inputLastName.getText().toString();
@@ -112,6 +116,7 @@ public class AddPatient extends AppCompatActivity {
         else description = inputDescription.getText().toString();
     }
 
+    //moves current page to listOfPatients page
     public void returnToListOfPatients() {
         Intent intent = new Intent(this, ListOfPatients.class);
         startActivity(intent);

@@ -19,6 +19,7 @@ public class PatientModel {
         this.description = description;
     }
 
+    //getter & setters made to store users information
     public String getFirstName() {
         return firstName;
     }

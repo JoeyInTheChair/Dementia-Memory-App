@@ -16,8 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ListOfPatients extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    PatientListAdapter adapter;
+    private RecyclerView recyclerView;
+    private PatientListAdapter adapter;
     private PatientListAdapter.RecyclerViewClickListener listener;
 
     @Override
@@ -28,11 +28,14 @@ public class ListOfPatients extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //pulling user data from database
         FirebaseRecyclerOptions<PatientModel> options =
                 new FirebaseRecyclerOptions.Builder<PatientModel>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("patient"), PatientModel.class)
                         .build();
+
         setOnClickListener();
+
         adapter = new PatientListAdapter(options, listener);
         recyclerView.setAdapter(adapter);
 
@@ -40,28 +43,29 @@ public class ListOfPatients extends AppCompatActivity {
         button.setOnClickListener(v -> openAddPatient());
     }
 
+    //retrieve necessary data, and transfer them to the next page
+    //i.e. go from current page to the user's personal profile page with their data
     private void setOnClickListener() {
         listener = (v, pos) -> {
             Intent intent = new Intent(getApplicationContext(), PatientProfile.class);
-            String firstName = adapter.getItem(pos).getFirstName();
-            String lastName = adapter.getItem(pos).getLastName();
-            String gender = adapter.getItem(pos).getGender();
-            String dateOfBirth = adapter.getItem(pos).getDateOfBirth();
-            String desc = adapter.getItem(pos).getDescription();
-            intent.putExtra("firstName", firstName);
-            intent.putExtra("lastName", lastName);
-            intent.putExtra("gender", gender);
-            intent.putExtra("DoB", dateOfBirth);
-            intent.putExtra("Description", desc);
+            intent.putExtra("firstName", adapter.getItem(pos).getFirstName());
+            intent.putExtra("lastName", adapter.getItem(pos).getLastName());
+            intent.putExtra("gender", adapter.getItem(pos).getGender());
+            intent.putExtra("DoB", adapter.getItem(pos).getDateOfBirth());
+            intent.putExtra("description", adapter.getItem(pos).getDescription());
+            intent.putExtra("id", adapter.getUniqueId(pos));
             startActivity(intent);
         };
     }
 
+    //opens new page to add new user data
     public void openAddPatient() {
         Intent intent = new Intent(this, AddPatient.class);
         startActivity(intent);
     }
 
+    //allows PatientListAdapter class to be read into this class
+    //and read the data in the database
     @Override
     protected void onStart() {
         super.onStart();
@@ -74,6 +78,7 @@ public class ListOfPatients extends AppCompatActivity {
         adapter.stopListening();
     }
 
+    //used to search a patients name in the database and show on screen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search, menu);

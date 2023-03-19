@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalYearProject">
         <activity
+            android:name=".CheckPatientGraph"
+            android:exported="false" />
+        <activity
             android:name=".EvaluatePage"
             android:exported="false" />
         <activity
@@ -28,9 +31,6 @@
             android:exported="false" />
         <activity
             android:name=".QuestionOne"
-            android:exported="false" />
-        <activity
-            android:name=".StartGame"
             android:exported="false" />
         <activity
             android:name=".PatientProfile"

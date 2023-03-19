@@ -25,7 +25,7 @@ public class QuestionTwo extends AppCompatActivity {
     private int score = 0, pos = 0, questionOne = 0;
     private final String guess = "Guess this word";
     private final SpannableString spannableString = new SpannableString(guess);
-    private String firstName, lastName, gender, dateOfBirth, desc;
+    private String firstName, lastName, id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,56 +45,49 @@ public class QuestionTwo extends AppCompatActivity {
 
         correct.setOnClickListener(view -> {
             score++;
-            if(pos == 5) {
-                wordsUsed[pos-1].setVisibility(View.INVISIBLE);
-                finishGame();
-            }
-            else {
-                wordsUsed[pos-1].setVisibility(View.INVISIBLE);
-                wordsUsed[pos].setText(spannableString);
-                pos++;
-            }
-
+            nextWord();
         });
 
-        incorrect.setOnClickListener(view -> {
-            if(pos == 5) {
-                wordsUsed[pos-1].setVisibility(View.INVISIBLE);
-                finishGame();
-            }
-            else {
-                wordsUsed[pos-1].setVisibility(View.INVISIBLE);
-                wordsUsed[pos].setText(guess);
-                pos++;
-            }
-        });
+        incorrect.setOnClickListener(view -> nextWord());
 
         continueButton.setOnClickListener(view -> continueToQuestionThree());
     }
+
+    private void nextWord() {
+        if(pos == 5) {
+            wordsUsed[pos-1].setVisibility(View.INVISIBLE);
+            finishGame();
+        }
+        else {
+            wordsUsed[pos-1].setVisibility(View.INVISIBLE);
+            wordsUsed[pos].setText(spannableString);
+            pos++;
+        }
+    }
+
+    //moving on to next page while storing new data made from this page
     public void continueToQuestionThree() {
         Intent intent = new Intent(this, QuestionThree.class);
         intent.putExtra("firstName", firstName);
         intent.putExtra("lastName", lastName);
-        intent.putExtra("DoB", dateOfBirth);
-        intent.putExtra("gender", gender);
-        intent.putExtra("description", desc);
+        intent.putExtra("id", id);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", score);
         startActivity(intent);
     }
 
+    //pulling previous data from last page and assigning them to variables
     private void retrieveBundleInformation() {
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null){
             firstName = patientInfo.getString("firstName");
             lastName = patientInfo.getString("lastName");
-            dateOfBirth = patientInfo.getString("DoB");
-            gender = patientInfo.getString("gender");
-            desc = patientInfo.getString("description");
+            id = patientInfo.getString("id");
             questionOne = patientInfo.getInt("questionOne");
         }
     }
 
+    //changing the font of the word that needs to be guessed
     private void fontChange() {
         StyleSpan italicFont = new StyleSpan(Typeface.ITALIC);
         spannableString.setSpan(italicFont, 0, guess.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -106,6 +99,8 @@ public class QuestionTwo extends AppCompatActivity {
         incorrect.setEnabled(false);
     }
 
+    //sorting out id's from xml file
+    //setting and showing the 5 random words to the user
     private void sortIds() {
         wordsUsed[0] = findViewById(R.id.guessWordOne);
         wordsUsed[1] = findViewById(R.id.guessWordTwo);
@@ -127,6 +122,7 @@ public class QuestionTwo extends AppCompatActivity {
         continueButton.setVisibility(View.INVISIBLE);
     }
 
+    //retrieve the 5 random words from this array
     public void getListOfWords() {
         String [] array = {"spicy", "fable", "quilt", "lunar", "wreck", "brisk", "fudge", "frown", "trump", "globe", "tulip", "flair", "slump", "whirl", "swoop", "humid", "creed", "stoop", "gloom", "hinge", "crisp", "stomp", "clasp", "shack", "cabin", "plaid", "coast", "braid", "hatch", "stark", "fable", "quilt", "shale", "crumb", "swarm", "flask", "grasp", "snore", "prick", "bison", "dwarf", "snarl", "mirth", "spout", "smirk", "sable", "gully", "sneak", "crank", "drift", "flame", "gummy", "daisy", "glaze", "jolly", "proud", "silly", "salsa", "swoop", "globe", "crown", "fable", "couch", "lemon", "hazel", "nudge", "prize", "quilt", "sable", "sneak", "snore", "spice", "sting", "swirl", "thick", "trace", "trail", "trunk", "vegan", "wedge", "yacht", "blaze", "brisk", "chime", "clerk", "craft", "dwarf", "flair", "frost", "grind", "hatch", "heist", "hurry", "joker", "jumpy", "laser", "lodge", "lunar", "mimic", "mucus"};
         list = Arrays.asList(array);
@@ -140,6 +136,7 @@ public class QuestionTwo extends AppCompatActivity {
         Collections.shuffle(list);
     }
 
+    //selecting 5 random words from the word array to ask the user
     private void createWordsList() {
         int[] randomNumbers = new int[5];
         shuffleList(this.list);

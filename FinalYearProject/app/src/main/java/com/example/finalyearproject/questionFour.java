@@ -16,7 +16,7 @@ public class QuestionFour extends AppCompatActivity {
     private Button continueBtn;
     private final EditText[] clock = new EditText[12];
     private final List<Integer> inputValues = new ArrayList<>();
-    private String firstName, lastName, gender, dateOfBirth, desc;
+    private String firstName, lastName, id;
     private int score = 0, questionOne = 0, questionTwo = 0, questionThree = 0;
 
     @Override
@@ -39,13 +39,12 @@ public class QuestionFour extends AppCompatActivity {
         });
     }
 
+    //move to next page, and store newest result
     public void continueToQuestionFive() {
         Intent intent = new Intent(this, QuestionFive.class);
         intent.putExtra("firstName", firstName);
         intent.putExtra("lastName", lastName);
-        intent.putExtra("DoB", dateOfBirth);
-        intent.putExtra("gender", gender);
-        intent.putExtra("description", desc);
+        intent.putExtra("id", id);
         intent.putExtra("questionOne", questionOne);
         intent.putExtra("questionTwo", questionTwo);
         intent.putExtra("questionThree", questionThree);
@@ -53,6 +52,7 @@ public class QuestionFour extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //check if the inputted answers are correct, and return a score value
     public void checkAnswers() {
         final int [] result = {12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         for(int i = 0; i < result.length; i++) {
@@ -61,20 +61,20 @@ public class QuestionFour extends AppCompatActivity {
         }
     }
 
+    //retrieve all info from previous page and store in variables
     private void retrieveBundleInformation() {
         Bundle patientInfo = getIntent().getExtras();
         if(patientInfo != null){
             firstName = patientInfo.getString("firstName");
             lastName = patientInfo.getString("lastName");
-            dateOfBirth = patientInfo.getString("DoB");
-            gender = patientInfo.getString("gender");
-            desc = patientInfo.getString("description");
+            id = patientInfo.getString("id");
             questionOne = patientInfo.getInt("questionOne");
             questionTwo = patientInfo.getInt("questionTwo");
             questionThree = patientInfo.getInt("questionThree");
         }
     }
 
+    //get all inputted values made by user and store in list
     private void retrieveClockValues() {
         for (EditText editText : clock) {
             int input = Integer.parseInt(editText.getText().toString());
@@ -82,6 +82,7 @@ public class QuestionFour extends AppCompatActivity {
         }
     }
 
+    //make sure all input boxes are filled up with an appropriate answer
     private boolean checkValidation() {
         return !TextUtils.isEmpty(clock[0].getText().toString()) && !TextUtils.isEmpty(clock[1].getText().toString())
                 && !TextUtils.isEmpty(clock[2].getText().toString()) && !TextUtils.isEmpty(clock[3].getText().toString())
@@ -91,21 +92,15 @@ public class QuestionFour extends AppCompatActivity {
                 && !TextUtils.isEmpty(clock[10].getText().toString()) && !TextUtils.isEmpty(clock[11].getText().toString());
     }
 
+    //alert the user if they have not inputted an answer
     private void alert() {
-        if (TextUtils.isEmpty(clock[0].getText().toString())) clock[0].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[1].getText().toString())) clock[1].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[2].getText().toString())) clock[2].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[3].getText().toString())) clock[3].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[4].getText().toString())) clock[4].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[5].getText().toString())) clock[5].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[6].getText().toString())) clock[6].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[7].getText().toString())) clock[7].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[8].getText().toString())) clock[8].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[9].getText().toString())) clock[9].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[10].getText().toString())) clock[10].setError("Input Needed");
-        if (TextUtils.isEmpty(clock[11].getText().toString())) clock[11].setError("Input Needed");
+        for(int i = 0; i < clock.length; i++) {
+            if(TextUtils.isEmpty(clock[0].getText().toString()))
+                clock[i].setError("Input Needed");
+        }
     }
 
+    //sort ids in xml file
     private void sortIds() {
         clock[0] = findViewById(R.id.twelveOclock);
         clock[1] = findViewById(R.id.oneOclock);

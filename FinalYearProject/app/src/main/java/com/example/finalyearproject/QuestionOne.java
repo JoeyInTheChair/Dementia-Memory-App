@@ -16,9 +16,10 @@ import java.util.List;
 public class QuestionOne extends AppCompatActivity {
     private ImageView imageView;
     private Button correct, incorrect, continueButton;
-    private String firstName, lastName, gender, dateOfBirth, desc;
+    private String firstName, lastName, id;
     private int score = 0;
 
+    //array is used to store all possible pictures that could be asked for the user
     private final Integer[] viewImage = {
             R.drawable.image1,
             R.drawable.image2,
@@ -71,26 +72,24 @@ public class QuestionOne extends AppCompatActivity {
 
         correct.setOnClickListener(view -> {
             score++;
-            if(pos[0] == 5) {
-                finishGame();
-            }
-            else {
-                imageView.setImageResource(usedImage.get(pos[0]));
-                pos[0]++;
-            }
+            moveToNextPicture();
         });
 
-        incorrect.setOnClickListener(view -> {
-            if(pos[0] == 5)
-                finishGame();
-            else {
-                imageView.setImageResource(usedImage.get(pos[0]));
-                pos[0]++;
-            }
-        });
+        incorrect.setOnClickListener(view -> moveToNextPicture());
 
         continueButton.setOnClickListener(view -> continueToQuestionTwo());
 
+    }
+
+    //after user clicks button, moves on to the next picture
+    private void moveToNextPicture() {
+        if(pos[0] == 5) {
+            finishGame();
+        }
+        else {
+            imageView.setImageResource(usedImage.get(pos[0]));
+            pos[0]++;
+        }
     }
 
     private void retrieveBundleInformation() {
@@ -98,24 +97,22 @@ public class QuestionOne extends AppCompatActivity {
         if(patientName != null) {
             firstName = patientName.getString("firstName");
             lastName = patientName.getString("lastName");
-            dateOfBirth = patientName.getString("DoB");
-            gender = patientName.getString("gender");
-            desc = patientName.getString("description");
+            id = patientName.getString("id");
         }
 
     }
 
+    //moves on to the next question, while keeping the result of this question
     private void continueToQuestionTwo() {
         Intent intent = new Intent(this, QuestionTwo.class);
         intent.putExtra("firstName", firstName);
         intent.putExtra("lastName", lastName);
-        intent.putExtra("DoB", dateOfBirth);
-        intent.putExtra("gender", gender);
-        intent.putExtra("description", desc);
+        intent.putExtra("id", id);
         intent.putExtra("questionOne", score);
         startActivity(intent);
     }
 
+    //when the user finishes guess all 5 images it shows the continue button
     private void finishGame() {
         correct.setEnabled(false);
         incorrect.setEnabled(false);
@@ -123,8 +120,10 @@ public class QuestionOne extends AppCompatActivity {
         continueButton.setVisibility(View.VISIBLE);
     }
 
+    //gets 5 random images from the image array and will be use to show the user
     private void showImageList() {
         int [] randomNumbers = new int [5];
+        //loop is used to make sure none of the 5 random numbers that are picked are the same as the previous one
         shuffleList(this.imageList);
         for (int i = 0; i < 29; i++) {
             randomNumbers[0] = (int)(Math.random()*29)+1;
@@ -150,6 +149,8 @@ public class QuestionOne extends AppCompatActivity {
             }
 
         }
+
+        //store the randomly picked images inside a list to be used to show the user the randomly picked images
         this.usedImage.add(this.imageList.get(randomNumbers[0]));
         this.usedImage.add(this.imageList.get(randomNumbers[1]));
         this.usedImage.add(this.imageList.get(randomNumbers[2]));
@@ -157,12 +158,14 @@ public class QuestionOne extends AppCompatActivity {
         this.usedImage.add(this.imageList.get(randomNumbers[4]));
     }
 
+    //shuffling list
     private void shuffleList(List<Integer> imageList) {
         Collections.shuffle(imageList);
         Collections.shuffle(imageList);
         Collections.shuffle(imageList);
     }
 
+    //assigning variables from XML file
     private void assignVariables() {
         imageView = findViewById(R.id.imageView);
         correct = findViewById(R.id.correct);
