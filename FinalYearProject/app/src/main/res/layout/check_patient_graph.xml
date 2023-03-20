@@ -1,103 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CheckPatientGraph">
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/patient_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginRight="92dp"
-        android:text="@string/id_name"
-        android:textColor="#0097A7"
-        android:textSize="55sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/return_home"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/return_back"
+            app:backgroundTint="#FF0101"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toStartOf="@+id/patient_name"
+            app:layout_constraintHorizontal_bias="0.086"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="336dp"
-        android:layout_marginLeft="336dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="336dp"
-        android:layout_marginRight="336dp"
-        android:text="Results"
-        android:textColor="#0097A7"
-        android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patient_name" />
-
-    <Button
-        android:id="@+id/return_home"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/return_back"
-        app:backgroundTint="#FF0101"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.391"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ScrollView
-        android:layout_width="898dp"
-        android:layout_height="1054dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <RelativeLayout
-            android:id="@+id/rl"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/patient_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginStart="284dp"
+            android:layout_marginLeft="284dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="283dp"
+            android:layout_marginRight="283dp"
+            android:text="Patient Name"
+            android:textColor="#0097A7"
+            android:textSize="55sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/q1Result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="340dp"
-                android:layout_marginEnd="340dp"
-                android:text="Question 1"
-                android:textColor="#0097A7"
-                android:textSize="45sp" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="376dp"
+            android:layout_marginLeft="376dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="376dp"
+            android:layout_marginRight="376dp"
+            android:text="Results"
+            android:textColor="#0097A7"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/patient_name" />
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/questionOne"
-                android:layout_width="match_parent"
-                android:layout_height="900dp"
-                android:layout_marginTop="60dp"/>
+        <TextView
+            android:id="@+id/q1Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="Question 1"
+            android:textColor="#0097A7"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <TextView
-                android:id="@+id/q2Result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="340dp"
-                android:layout_marginEnd="340dp"
-                android:text="Question 2"
-                android:textColor="#0097A7"
-                android:textSize="45sp"
-                android:layout_marginTop="990dp"/>
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/questionOne"
+            android:layout_width="875dp"
+            android:layout_height="525dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/q1Result"
+            tools:ignore="MissingConstraints" />
 
-        </RelativeLayout>
-    </ScrollView>
+        <TextView
+            android:id="@+id/q2Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="Question 2"
+            android:textColor="#0097A7"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionOne" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/questionTwo"
+            android:layout_width="875dp"
+            android:layout_height="525dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/q2Result"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/q3Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="Question 3"
+            android:textColor="#0097A7"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionTwo" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/questionThree"
+            android:layout_width="875dp"
+            android:layout_height="525dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/q3Result"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/q4Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="Question 4"
+            android:textColor="#0097A7"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionThree" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/questionFour"
+            android:layout_width="875dp"
+            android:layout_height="525dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/q4Result"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/q5Result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="Question 5"
+            android:textColor="#0097A7"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionFour" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/questionFive"
+            android:layout_width="875dp"
+            android:layout_height="525dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/q5Result"
+            tools:ignore="MissingConstraints" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

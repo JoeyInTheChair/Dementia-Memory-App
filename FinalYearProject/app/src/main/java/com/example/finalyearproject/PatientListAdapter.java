@@ -64,14 +64,9 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
         holder.dateOfBirth.setText(dateOfBirth);
         holder.gender.setText(gender);
         
-        holder.deleteButton.setOnClickListener(view -> {
-            deletePatientInfo(holder, position);
-        });
+        holder.deleteButton.setOnClickListener(view -> deletePatientInfo(holder, position));
 
-        holder.updateButton.setOnClickListener(view -> {
-
-            updateUserInfo(holder, position, model);
-        });
+        holder.updateButton.setOnClickListener(view -> updateUserInfo(holder, position, model));
     }
 
     //when user clicks update button, runs this operation
@@ -86,10 +81,13 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
         EditText firstName = v.findViewById(R.id.patientFirstName);
         EditText lastName = v.findViewById(R.id.patientLastName);
         EditText desc = v.findViewById(R.id.patientDescription);
-        TextView dob = v.findViewById(R.id.patient_date_of_birth);
-        AutoCompleteTextView gender = v.findViewById(R.id.gender);
         Button update = v.findViewById(R.id.updatePatientToDB);
         Button cancel = v.findViewById(R.id.cancel);
+
+        TextView dob = v.findViewById(R.id.patient_date_of_birth);
+        AutoCompleteTextView gender = v.findViewById(R.id.gender);
+
+
 
         firstName.setText(model.getFirstName());
         lastName.setText(model.getLastName());
@@ -122,6 +120,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
         });
         cancel.setOnClickListener(view1 -> dialogPlus.dismiss());
     }
+
 
     //when user presses delete button it runs this operation
     //i.e deletes all users data inside database
