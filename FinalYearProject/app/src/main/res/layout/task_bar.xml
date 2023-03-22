@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day"
+            android:textColor="#737272"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="10dp"
+            android:textSize="45sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/day"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:text="00"
+            android:textColor="#0097A7"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="10dp"
+            android:text="Mon"
+            android:textColor="#737272"
+            android:textStyle="bold"
+            android:textSize="45sp" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="250dp"
+            android:background="?android:attr/listDivider"
+            android:layout_toRightOf="@+id/day"
+            android:layout_marginLeft="45dp" />
+
+        <TextView
+            android:id="@+id/taskName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@+id/divider"
+            android:text="Task"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/taskDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taskName"
+            android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@+id/divider"
+            android:text="Description"
+            android:textColor="#48B9C5"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/taskTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taskDescription"
+            android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@+id/divider"
+            android:text="Time"
+            android:textColor="#48B9C5"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/updatePatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/taskTime"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/divider"
+            android:text="Completed"
+            android:textSize="30dp"
+            app:backgroundTint="#4CAF50" />
+
+        <Button
+            android:id="@+id/deletePatient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:textSize="30dp"
+            app:backgroundTint="#A12323"
+            android:layout_toRightOf="@id/divider"
+            android:layout_below="@id/taskTime"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="100dp"/>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+

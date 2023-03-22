@@ -26,7 +26,7 @@
         android:layout_width="814dp"
         android:layout_height="310dp"
         android:layout_marginStart="43dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="43dp"
         android:gravity="center"
         android:text="@string/tap_one_circle_to_another_starting_at_1_and_alternating_number_to_letter_in_order_ending_at_f"

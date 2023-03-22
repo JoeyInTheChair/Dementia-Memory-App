@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="69dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="68dp"
         android:text="Remember These 5 Words"
         android:textColor="#FFFFFF"

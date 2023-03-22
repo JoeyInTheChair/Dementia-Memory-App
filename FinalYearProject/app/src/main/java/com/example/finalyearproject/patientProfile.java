@@ -12,7 +12,7 @@ public class PatientProfile extends AppCompatActivity {
     private TextView patientName, patientDescription;
     private String name, description;
     private String firstName, lastName, dateOfBirth, gender, desc, id;
-    private Button returnToList, start, checkGraph;
+    private Button returnToList, start, checkGraph, reminders;
 
 
     @Override
@@ -29,6 +29,7 @@ public class PatientProfile extends AppCompatActivity {
         returnToList.setOnClickListener(v -> openListOfPatients());
         start.setOnClickListener(v -> openQuestionOne());
         checkGraph.setOnClickListener(v -> openCheckPatientResults());
+        reminders.setOnClickListener(v -> openReminderListPage());
     }
 
     //retrieve all user information from previous page and store in variables
@@ -54,6 +55,7 @@ public class PatientProfile extends AppCompatActivity {
         returnToList = findViewById(R.id.return_to_list);
         start = findViewById(R.id.go_quiz);
         checkGraph = findViewById(R.id.check_graph);
+        reminders = findViewById(R.id.reminders);
     }
 
     //move to next page and include necessary data to move to next page
@@ -78,6 +80,17 @@ public class PatientProfile extends AppCompatActivity {
 
     public void openListOfPatients() {
         Intent intent = new Intent(this, ListOfPatients.class);
+        startActivity(intent);
+    }
+
+    public void openReminderListPage() {
+        Intent intent = new Intent(this, ReminderPage.class);
+        intent.putExtra("firstName", firstName);
+        intent.putExtra("lastName", lastName);
+        intent.putExtra("DoB", dateOfBirth);
+        intent.putExtra("gender", gender);
+        intent.putExtra("description", desc);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

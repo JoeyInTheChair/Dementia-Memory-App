@@ -46,43 +46,42 @@ public class CheckPatientGraph extends AppCompatActivity {
 
     //run through map and find each answer for each question significant to that answer
         private void storePatientResults(Map<String, Object> doc, String id) {
-        for(String i : doc.keySet()) {
-            if(i.equals(id)){
-                for(Object o : doc.values()) {
-                    Map<String, Object> temp = (Map<String, Object>) o;
-                    long val;
-                    for(String key :  temp.keySet()) {
-                        switch (key) {
-                            case "questionOne":
-                                val = (long)temp.get(key);
-                                qOne.add(Long.valueOf(val).intValue());
-                                break;
-                            case "questionTwo":
-                                val = (long)temp.get(key);
-                                qTwo.add(Long.valueOf(val).intValue());
-                                break;
-                            case "questionThree":
-                                val = (long)temp.get(key);
-                                qThree.add(Long.valueOf(val).intValue());
-                                break;
-                            case "questionFour":
-                                val = (long)temp.get(key);
-                                qFour.add(Long.valueOf(val).intValue());
-                                break;
-                            default:
-                                val = (long)temp.get(key);
-                                qFive.add(Long.valueOf(val).intValue());
-                                break;
+            for(String i : doc.keySet()) {
+                if(i.equals(id)){
+                    for(Object o : doc.values()) {
+                        Map<String, Object> temp = (Map<String, Object>) o;
+                        long val;
+                        for(String key :  temp.keySet()) {
+                            switch (key) {
+                                case "questionOne":
+                                    val = (long)temp.get(key);
+                                    qOne.add(Long.valueOf(val).intValue());
+                                    break;
+                                case "questionTwo":
+                                    val = (long)temp.get(key);
+                                    qTwo.add(Long.valueOf(val).intValue());
+                                    break;
+                                case "questionThree":
+                                    val = (long)temp.get(key);
+                                    qThree.add(Long.valueOf(val).intValue());
+                                    break;
+                                case "questionFour":
+                                    val = (long)temp.get(key);
+                                    qFour.add(Long.valueOf(val).intValue());
+                                    break;
+                                default:
+                                    val = (long)temp.get(key);
+                                    qFive.add(Long.valueOf(val).intValue());
+                                    break;
+                            }
                         }
                     }
                 }
-            }
         }
     }
 
     //display results by getting points on a line graph
     private void setResultsOnGraph(List<Integer> question, GraphView graphView) {
-        System.out.println("[INFO] LINE 94" + question);
         List<DataPoint> dataPoints = new ArrayList<>();
         int xCoordinate = 0;
         DataPoint point;

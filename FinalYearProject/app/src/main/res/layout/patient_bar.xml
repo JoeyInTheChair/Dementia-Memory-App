@@ -23,15 +23,15 @@
             app:civ_border_width="5dp"/>
 
         <TextView
+            android:id="@+id/patientName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/patientName"
-            android:text="Patient Name"
-            android:textStyle="bold"
-            android:textSize="50sp"
-            android:textColor="@color/black"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/profilePic"
-            android:layout_marginLeft="15dp"/>
+            android:text="Patient Name"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"

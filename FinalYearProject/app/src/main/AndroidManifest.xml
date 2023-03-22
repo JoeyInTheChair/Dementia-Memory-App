@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalYearProject">
         <activity
+            android:name=".ReminderPage"
+            android:exported="false" />
+        <activity
             android:name=".CheckPatientGraph"
             android:exported="false" />
         <activity
