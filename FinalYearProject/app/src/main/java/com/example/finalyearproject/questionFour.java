@@ -94,9 +94,9 @@ public class QuestionFour extends AppCompatActivity {
 
     //alert the user if they have not inputted an answer
     private void alert() {
-        for(int i = 0; i < clock.length; i++) {
-            if(TextUtils.isEmpty(clock[0].getText().toString()))
-                clock[i].setError("Input Needed");
+        for (EditText editText : clock) {
+            if (TextUtils.isEmpty(clock[0].getText().toString()))
+                editText.setError("Input Needed");
         }
     }
 

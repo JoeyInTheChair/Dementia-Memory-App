@@ -5,10 +5,13 @@ public class TaskModel {
     String taskDescription;
     String taskDate;
     String taskTime;
+    String id;
 
     public TaskModel() {
 
     }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public String getTaskTitle() {
         return taskTitle;
     }

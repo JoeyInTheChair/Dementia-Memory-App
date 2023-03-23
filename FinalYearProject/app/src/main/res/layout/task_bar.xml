@@ -88,28 +88,18 @@
             android:textSize="35sp" />
 
         <Button
-            android:id="@+id/updatePatient"
+            android:id="@+id/completeTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/taskTime"
-            android:layout_marginLeft="350dp"
+            android:layout_marginLeft="225dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/divider"
             android:text="Completed"
             android:textSize="30dp"
             app:backgroundTint="#4CAF50" />
 
-        <Button
-            android:id="@+id/deletePatient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:textSize="30dp"
-            app:backgroundTint="#A12323"
-            android:layout_toRightOf="@id/divider"
-            android:layout_below="@id/taskTime"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="100dp"/>
+
 
 
     </RelativeLayout>
