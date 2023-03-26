@@ -74,7 +74,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
     private void updateUserInfo(@NonNull myViewHolder holder, int position, @NonNull PatientModel model) {
         final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
                 .setContentHolder(new ViewHolder(R.layout.update_patient))
-                .setExpanded(true, 2170)
+                .setExpanded(true, 2100)
                 .create();
 
         View v = dialogPlus.getHolderView();
@@ -108,10 +108,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<PatientModel, Pa
             map.put("description", desc.getText().toString());
 
             FirebaseDatabase.getInstance().getReference().child("patient")
-                    .child(Objects.requireNonNull(getRef(position).getKey())).removeValue();
-
-            FirebaseDatabase.getInstance().getReference().child("patient").push()
-                    .setValue(map)
+                    .child(Objects.requireNonNull(getRef(position).getKey())).updateChildren(map)
                     .addOnSuccessListener(unused -> {
                         Toast.makeText(holder.name.getContext(), "Patient's Data Updated Successfully", Toast.LENGTH_SHORT).show();
                         dialogPlus.dismiss();

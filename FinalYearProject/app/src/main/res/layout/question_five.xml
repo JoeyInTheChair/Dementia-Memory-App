@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="y"
-        android:textColor="#E14E4E"
+        android:textColor="#E66E6E"
         android:textSize="55sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
